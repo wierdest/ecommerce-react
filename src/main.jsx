@@ -4,11 +4,11 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.js'
 import { ChakraProvider } from '@chakra-ui/react'
-import { dark } from './dark-theme.jsx'
+import { serrashop } from './serrashop-theme.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ChakraProvider theme={dark} >
+    <ChakraProvider theme={serrashop} >
       <BrowserRouter>
           <App />
         </BrowserRouter>

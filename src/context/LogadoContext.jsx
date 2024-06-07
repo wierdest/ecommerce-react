@@ -22,4 +22,4 @@ const LogadoProvider = ({children}) => {
     )
 }
 
-export { LogadoContext, LogadoProvider }
+export { LogadoContext, LogadoProvider } 
