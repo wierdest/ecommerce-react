@@ -27,12 +27,22 @@ function Navbar() {
           Cadastro
         </Link>
       </Box>
-      <Box as="li">
-        <Link as={NavLink} to="/outra-pagina" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
-          Outra Página
+      <Box as="li" mr={6}>
+        <Link as={NavLink} to="/produtos" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
+          Produtos
         </Link>
       </Box>
+      <Box as="li">
+        <Link as={NavLink} to="/pedidos" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
+          Pedidos
+        </Link>
+        </Box>
       <Spacer/>
+      <Box as="li" mr={6}>
+  <Button as={Link} to="/carrinho" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
+    Carrinho
+  </Button>
+      </Box>
       <Box as="li">
         <Button onClick={handleLogout} colorScheme="black" width="full">Logout</Button>
       </Box>

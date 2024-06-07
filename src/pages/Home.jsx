@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { LogadoContext } from "../context/LogadoContext";
 import {  Box } from '@chakra-ui/react';
-import Navbar from "../components/Menu/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 
 function Home() {
     const { estaLogado } = useContext(LogadoContext)
