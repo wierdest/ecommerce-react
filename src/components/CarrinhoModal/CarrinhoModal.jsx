@@ -1,3 +1,4 @@
+import React from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -6,6 +7,8 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    useDisclosure,
+    Button
   } from '@chakra-ui/react'
 
 function CarrinhoModal() {
@@ -15,15 +18,9 @@ function CarrinhoModal() {
     const btnRef = React.useRef(null)
     return (
       <>
-        <RadioGroup value={scrollBehavior} onChange={setScrollBehavior}>
-          <Stack direction='row'>
-            <Radio value='inside'>inside</Radio>
-            <Radio value='outside'>outside</Radio>
-          </Stack>
-        </RadioGroup>
   
         <Button mt={3} ref={btnRef} onClick={onOpen}>
-          Trigger modal
+          Carrinho
         </Button>
   
         <Modal
@@ -37,7 +34,7 @@ function CarrinhoModal() {
             <ModalHeader>Modal Title</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Lorem count={15} />
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis porro iusto nostrum mollitia explicabo qui odio quas perspiciatis minus? At commodi magnam in corrupti hic dignissimos a error pariatur quae!
             </ModalBody>
             <ModalFooter>
               <Button onClick={onClose}>Close</Button>

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Box, Button, Flex, Link, Spacer } from "@chakra-ui/react";
 import { LogadoContext } from '../../context/LogadoContext';
+import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
 
 function Navbar() {
 
@@ -39,9 +40,7 @@ function Navbar() {
         </Box>
       <Spacer/>
       <Box as="li" mr={6}>
-  <Button as={Link} to="/carrinho" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
-    Carrinho
-  </Button>
+        <CarrinhoModal/>
       </Box>
       <Box as="li">
         <Button onClick={handleLogout} colorScheme="black" width="full">Logout</Button>
