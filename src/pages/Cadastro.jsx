@@ -1,4 +1,4 @@
-import { React, useContext, useState  } from 'react';
+import { React, useContext, useState, useEffect  } from 'react';
 import { useHistory } from "react-router-dom";
 import { Button, Input, FormControl, FormLabel, Heading, Box, Text } from '@chakra-ui/react';
 import { LogadoContext } from "../context/LogadoContext"
@@ -6,12 +6,33 @@ import { api } from '../api/api'
 
 function Cadastro() {
 
-    const {nome, email, setNome, setEmail, setEstaLogado} = useContext(LogadoContext)
+    const {nome, email,  estaLogado, setNome, setEmail, setEstaLogado} = useContext(LogadoContext)
     const [senha, setSenha] = useState('')
+    const [message, setMessage] = useState('');
     const history = useHistory()
+
+    useEffect(() => {
+        if(estaLogado) {
+            console.log('JÁ ESTÁ LOGADO')
+            history.push('/')
+        }
+    },[] )
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(nome == "") {
+            setMessage("Por favor informe um nome válido")
+            return;
+        }
+        if(email == "") {
+            setMessage("Por favor informe um email válido")
+            return;
+        }
+        if(senha == "") {
+            setMessage("Por favor informe uma senha válida!")
+            return;
+        }
+    
         try {
             const response = await api.post('/users/',
                 {
@@ -56,6 +77,7 @@ function Cadastro() {
             <FormControl id="senha" mb={4}>
               <FormLabel>Senha:</FormLabel>
               <Input
+                autoComplete='new-password'
                 type="password"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
@@ -63,6 +85,7 @@ function Cadastro() {
             </FormControl>
             <Button colorScheme="green" type="submit" width="full">Cadastrar</Button>
           </form>
+          {message && <Text mt={4} color="red.500">{message}</Text>}
           <br/>
         </Box>
       </Box>
