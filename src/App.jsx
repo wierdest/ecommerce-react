@@ -16,8 +16,10 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/cadastro" component={Cadastro} />
           <Route exact path="/" component={Home} />
-        </LogadoProvider>
           <Route path="*" component={Erro404} />
+          
+        </LogadoProvider>
+        
       </Switch>
     </>
   )

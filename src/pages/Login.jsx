@@ -24,13 +24,12 @@ function Login() {
             if(response.status == 200) {
                 const usuarios = response.data
                 if (usuarios.length > 0) {
-                    const usuario = usuarios[0]; // Considerando que o email é único
-                    console.log('Usuário encontrado:', usuario);
+                    const usuario = usuarios[0]
+                    console.log('Usuário encontrado:', usuario)
                     setNome(usuario.nome)
                     setEmail(usuario.email)
                     
-                    localStorage.setItem('estaLogado', true); // Armazena o estado de login no localStorage
-                    
+                    localStorage.setItem('estaLogado', true)
                     setEstaLogado(true);
                     history.push("/")
                     setMessage("Login bem-sucedido!");
@@ -43,13 +42,7 @@ function Login() {
         } catch (error) {
             console.error('Erro ao buscar usuario', error);
         }
-        // if (email === "usuario@exemplo.com" && senha === "senha123") {
-        //     setEstaLogado(true);
-        //     setMessage("Login bem-sucedido!");
-        //     history.push("/")
-        // } else {
-        //     setMessage("Email ou senha incorretos.");
-        // }
+      
     };
     return (
       <Box height="100vh" display="flex" justifyContent="center" alignItems="center">
