@@ -13,20 +13,18 @@ import Pedidos from './pages/Pedidos'
 function App() {
   return (
     <>
-      <Switch>
-        <LogadoProvider>
+      <LogadoProvider>
+        <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/cadastro" component={Cadastro} />
           <Route exact path="/produtos" component={Produtos} />
           <Route exact path="/pedidos" component={Pedidos} />
           <Route exact path="/" component={Home} />
           <Route path="*" component={Erro404} />
-          
-        </LogadoProvider>
-        
-      </Switch>
+        </Switch>
+      </LogadoProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
