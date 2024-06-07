@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { Box, Button, Flex, Link, Spacer } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Spacer, IconButton } from "@chakra-ui/react";
 import { LogadoContext } from '../../context/LogadoContext';
 import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
+import { FiLogOut } from 'react-icons/fi';
 
 function Navbar() {
 
@@ -16,19 +17,19 @@ function Navbar() {
   }
 
   return (
-    <Box as="nav" bg="blue.500" color="white" p={4} width="90vw" >
-    <Flex as="ul" listStyleType="none" m={0} p={0} alignItems="center">
-      <Box as="li" mr={6}>
+    <Box as="nav" bg="blue.500" color="white" p={4} >
+    <Flex as="ul" listStyleType="none" m={0} p={0} alignItems="center" gap={10}>
+      <Box as="li">
         <Link as={NavLink} to="/" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
           Home
         </Link>
       </Box>
-      <Box as="li" mr={6}>
+      <Box as="li">
         <Link as={NavLink} to="/cadastro" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
           Cadastro
         </Link>
       </Box>
-      <Box as="li" mr={6}>
+      <Box as="li">
         <Link as={NavLink} to="/produtos" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
           Produtos
         </Link>
@@ -39,11 +40,11 @@ function Navbar() {
         </Link>
         </Box>
       <Spacer/>
-      <Box as="li" mr={6}>
+      <Box as="li">
         <CarrinhoModal/>
       </Box>
       <Box as="li">
-        <Button onClick={handleLogout} colorScheme="black" width="full">Logout</Button>
+        <IconButton onClick={handleLogout} icon={<FiLogOut/>} aria-label="Logout" colorScheme='black'/>
       </Box>
 
     </Flex>

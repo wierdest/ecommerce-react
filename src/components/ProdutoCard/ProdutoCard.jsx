@@ -11,21 +11,11 @@ import {
   ButtonGroup,
   Button,
 } from '@chakra-ui/react';
-import { px } from 'framer-motion';
-import { useEffect } from 'react';
+import { StarIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
-function ProdutoCard({product}) {
-  const {imgUrl, nome, descricao, preco, categoria, quantidade} = product;
+function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}) {
   const history = useHistory()
-  const {id} = useParams()
-
-  useEffect(() => {
-    
-  }, []);
-
-
   return ( 
     <Card maxW="sm">
       <CardBody>
@@ -44,15 +34,20 @@ function ProdutoCard({product}) {
             {descricao}
           </Text>
           <Text color="blue.600" fontSize="2xl">
-            {preco}
+            R$ {preco}
           </Text>
+        </Stack>
+        <Stack direction="row" spacing={1} justify="center" align="center">
+            {[1, 2, 3, 4, 5].map((_, index) => (
+              <StarIcon key={index} color="yellow.400" w={6} h={6} />
+            ))}
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
           <Button onClick={() => {
-            {history.push("/produto-especifico")}
+            {history.push(`/produtos/${id}`)}
           }} variant="solid" colorScheme="blue">
             Saber Mais
           </Button>

@@ -12,31 +12,41 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { px } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ProdutoCard from '../components/ProdutoCard/ProdutoCard';
-
+import { api } from '../api/api';
 
 function ProdutoEspecifico() {
   
-  const {id} = useParams()
-  const {produto, setProduto} = useState({})
-  
+  const { id } = useParams()
+
+  const [produto, setProduto] = useState({})
+
+  const obterProdutoPorId = async() => {
+    try {
+        const response = await api.get(`/produto/${id}`)
+        console.log(response.data)
+        setProduto(response.data);
+      } catch (error) {
+        console.error('Não foi possível encontrar esse produto específico.' + id, error)
+    }
+  }
+
   useEffect(() => {
     obterProdutoPorId();
   }) 
 
-  const obterProdutoPorId = async() => {
-    try {
-      const response = await api.get(`/produto/${id}`);
-      setProduto([response.data]);
-        } catch (error) {
-      console.error('Não foi possível encontrar esse produto específico.')
-    }
-  }
 
   return ( 
-    <ProdutoCard key={produto.id} product={produto} />
+    <ProdutoCard 
+    key={id} 
+    imgUrl={produto.imgUrl} 
+    nome={produto.nome}
+    descricao={produto.descricao}
+    preco ={produto.preco}
+  
+    />
   );
 }
 
