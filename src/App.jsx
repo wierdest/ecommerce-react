@@ -7,7 +7,7 @@ import Home from './pages/Home'
 import { LogadoProvider, LogadoContext } from './context/LogadoContext'
 import Cadastro from './pages/Cadastro'
 import Produtos from './pages/Produtos'
-import Pedidos from './pages/Pedidos'
+import Pedido from './pages/Pedido'
 import ProdutoEspecifico from './pages/ProdutoEspecifico'
 import { CarrinhoProvider } from './context/CarrinhoContext'
 
