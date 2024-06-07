@@ -13,9 +13,15 @@ import {
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { CarrinhoContext } from '../../context/CarrinhoContext';
 
 function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}) {
   const history = useHistory()
+  const {carrinho, setCarrinho} = useContext(CarrinhoContext)
+  const handleComprar = () => {
+    var ItemCarrinho = ()
+  }
   return ( 
     <Card maxW="sm">
       <CardBody>
@@ -51,8 +57,8 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}
           }} variant="solid" colorScheme="blue">
             Saber Mais
           </Button>
-          <Button variant="ghost" colorScheme="blue">
-            Add to cart
+          <Button onClick={handleComprar} variant="ghost" colorScheme="blue">
+            Comprar
           </Button>
         </ButtonGroup>
       </CardFooter>
