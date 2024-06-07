@@ -1,6 +1,5 @@
 import { React, useContext, useState  } from 'react';
 import { useHistory } from "react-router-dom";
-
 import { Button, Input, FormControl, FormLabel, Heading, Box, Text } from '@chakra-ui/react';
 import { LogadoContext } from '../context/LogadoContext';
 import { api } from '../api/api'
@@ -29,6 +28,9 @@ function Login() {
                     console.log('Usuário encontrado:', usuario);
                     setNome(usuario.nome)
                     setEmail(usuario.email)
+                    
+                    localStorage.setItem('estaLogado', true); // Armazena o estado de login no localStorage
+                    
                     setEstaLogado(true);
                     history.push("/")
                     setMessage("Login bem-sucedido!");
@@ -50,7 +52,7 @@ function Login() {
         // }
     };
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
+      <Box height="100vh" display="flex" justifyContent="center" alignItems="center">
         <Box maxW="sm" w="100%" p={6} borderWidth={1} borderRadius="md" boxShadow="lg">
           <Heading as="h2" size="lg" textAlign="center" mb={6}>Login</Heading>
           <form onSubmit={handleSubmit}>
@@ -72,6 +74,8 @@ function Login() {
             </FormControl>
             <Button colorScheme="blue" type="submit" width="full">Login</Button>
           </form>
+          <br/>
+          <Button onClick={() => history.push("/cadastro") } colorScheme="green" width="full">Cadastrar</Button>
           {message && <Text mt={4} color="red.500">{message}</Text>}
         </Box>
       </Box>
