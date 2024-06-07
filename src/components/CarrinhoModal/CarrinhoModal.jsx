@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useRef } from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -10,12 +10,18 @@ import {
     useDisclosure,
     Button
   } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom'
 
 function CarrinhoModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [scrollBehavior, setScrollBehavior] = React.useState('inside')
-  
-    const btnRef = React.useRef(null)
+    const history = useHistory()
+    const handleComprar = () => {
+      console.log("Comprou!!")
+      history.push("/pedido")
+    }
+    
+    
+    const btnRef = useRef(null)
     return (
       <>
   
@@ -27,7 +33,7 @@ function CarrinhoModal() {
           onClose={onClose}
           finalFocusRef={btnRef}
           isOpen={isOpen}
-          scrollBehavior={scrollBehavior}
+          scrollBehavior={'inside'}
         >
           <ModalOverlay />
           <ModalContent>
@@ -38,6 +44,7 @@ function CarrinhoModal() {
             </ModalBody>
             <ModalFooter>
               <Button onClick={onClose}>Close</Button>
+              <Button onClick={handleComprar}>Finalizar compra</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

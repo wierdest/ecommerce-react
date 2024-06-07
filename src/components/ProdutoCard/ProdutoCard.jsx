@@ -34,7 +34,7 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}
             {descricao}
           </Text>
           <Text color="blue.600" fontSize="2xl">
-            R$ {preco}
+           {preco !== undefined ? `R$ ${preco.toFixed(2)}` : 'Preço não disponível'}
           </Text>
         </Stack>
         <Stack direction="row" spacing={1} justify="center" align="center">
