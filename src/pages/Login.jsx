@@ -3,25 +3,51 @@ import { useHistory } from "react-router-dom";
 
 import { Button, Input, FormControl, FormLabel, Heading, Box, Text } from '@chakra-ui/react';
 import { LogadoContext } from '../context/LogadoContext';
+import { api } from '../api/api'
 
 
 function Login() {
-    const {setEstaLogado} = useContext(LogadoContext)
+    const {nome, email, setEstaLogado, setNome, setEmail} = useContext(LogadoContext)
     const history = useHistory()
     // esses estados são locais, só da pagina de login, certo?
-    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [message, setMessage] = useState('');
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (email === "usuario@exemplo.com" && senha === "senha123") {
-            setEstaLogado(true);
-            setMessage("Login bem-sucedido!");
-            history.push("/")
-        } else {
-            setMessage("Email ou senha incorretos.");
+        try {
+            const response = await api.get('/users/', {
+                params: {
+                    email,
+                    senha
+                }
+            })
+            if(response.status == 200) {
+                const usuarios = response.data
+                if (usuarios.length > 0) {
+                    const usuario = usuarios[0]; // Considerando que o email é único
+                    console.log('Usuário encontrado:', usuario);
+                    setNome(usuario.nome)
+                    setEmail(usuario.email)
+                    setEstaLogado(true);
+                    history.push("/")
+                    setMessage("Login bem-sucedido!");
+                } else {
+                    console.log('Usuário não encontrado');
+                    setMessage("Email ou senha incorretos.");
+                }
+            }
+
+        } catch (error) {
+            console.error('Erro ao buscar usuario', error);
         }
+        // if (email === "usuario@exemplo.com" && senha === "senha123") {
+        //     setEstaLogado(true);
+        //     setMessage("Login bem-sucedido!");
+        //     history.push("/")
+        // } else {
+        //     setMessage("Email ou senha incorretos.");
+        // }
     };
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
