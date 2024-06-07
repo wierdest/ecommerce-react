@@ -15,17 +15,10 @@ function Produtos() {
     }
   };
 
-  const obterProdutoPorId = async() => {
-    try {
-      const response = await api.get(`/produto/${id}`);
-      setProdutos([response.data]);
-        } catch (error) {
-      console.error('Não foi possível encontrar esse produto específico.')
-    }
-  }
   useEffect(() => {
     obterTodos();
   }, []);
+  
   return (
     <>
       <SimpleGrid spacing={4} templateColumns="repeat(3,1fr)">

@@ -8,6 +8,7 @@ import { LogadoProvider, LogadoContext } from './context/LogadoContext'
 import Cadastro from './pages/Cadastro'
 import Produtos from './pages/Produtos'
 import Pedidos from './pages/Pedidos'
+import ProdutoEspecifico from './pages/ProdutoEspecifico'
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route exact path="/cadastro" component={Cadastro} />
           <Route exact path="/produtos" component={Produtos} />
           <Route exact path="/pedidos" component={Pedidos} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/produto-especifico/:id" component={ProdutoEspecifico} />
+          <Route exact path="/" component={Home}/>
           <Route path="*" component={Erro404} />
         </Switch>
       </LogadoProvider>
