@@ -12,8 +12,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-function ProdutoCard() {
-  return (
+function ProdutoCard({product}) {
+  return ( 
     <Card maxW="sm">
       <CardBody>
         <Image
