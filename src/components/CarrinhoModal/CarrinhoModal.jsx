@@ -10,11 +10,16 @@ import {
     useDisclosure,
     Button
   } from '@chakra-ui/react'
+import { useContext } from 'react';
+import { CarrinhoContext } from '../../context/CarrinhoContext';
 import { useHistory } from 'react-router-dom'
+import ItemCarrinho from '../ItemCarrinho/ItemCarrinho';
 
 function CarrinhoModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const history = useHistory()
+    const {carrinho, setCarrinho} = useContext(CarrinhoContext)
+
     const handleComprar = () => {
       console.log("Comprou!!")
       history.push("/pedido")
@@ -40,7 +45,15 @@ function CarrinhoModal() {
             <ModalHeader>Modal Title</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis porro iusto nostrum mollitia explicabo qui odio quas perspiciatis minus? At commodi magnam in corrupti hic dignissimos a error pariatur quae!
+              
+              {carrinho.map((itemCarrinho, index) => (
+                <ItemCarrinho
+                  key={index}
+                  imgUrl={itemCarrinho.imgUrl}
+                  nome={itemCarrinho.nome}
+                  preco={itemCarrinho.preco}
+                />
+              ))}
             </ModalBody>
             <ModalFooter>
               <Button onClick={onClose}>Close</Button>

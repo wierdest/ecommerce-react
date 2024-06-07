@@ -12,4 +12,4 @@ const CarrinhoProvider = ({children}) => {
     )
 }
 
-export { CarrinhoContext, CarrinhoProvider }
+export { CarrinhoContext, CarrinhoProvider } 
