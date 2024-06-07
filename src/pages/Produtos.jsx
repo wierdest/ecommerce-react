@@ -34,9 +34,7 @@ function Produtos() {
         )
 
         )}
-        <ProdutoCard />
-        <ProdutoCard />
-        <ProdutoCard />
+        
       </SimpleGrid>
     </>
   );
