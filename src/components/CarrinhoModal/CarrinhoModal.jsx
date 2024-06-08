@@ -10,7 +10,6 @@ import {
     useDisclosure,
     Button
   } from '@chakra-ui/react'
-import { useContext } from 'react';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 import ItemCarrinho from '../ItemCarrinho/ItemCarrinho';
 
