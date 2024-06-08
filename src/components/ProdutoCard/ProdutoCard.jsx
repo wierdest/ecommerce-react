@@ -18,7 +18,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 
-function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}) {
+function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeEstoque, quantidadePedido}) {
   const history = useHistory()
   const toast = useToast()
 
@@ -30,15 +30,48 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}
     const gerarEstrelasAleatorias = () => Math.floor(Math.random() * 5) + 1;
     setEstrelas(gerarEstrelasAleatorias());
   }, []);
+
   const handleComprar = () => {
-    var itemCarrinho = {id, imgUrl, nome, descricao, preco}
-    setCarrinho([...carrinho, itemCarrinho])
-    toast({
-      title: 'Produto Adicionado ao Carrinho',
-      status: 'success',
-      duration: 1500,
-      isClosable: true,
-    }) 
+    var itemCarrinho = {id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido}
+
+    var itens = [...carrinho]
+    var itemAdicionarMaisUm = false
+    var adicionar = true;
+    
+    itens.forEach((item) => {
+      if(item.id == id) {
+        var estoque = item.quantidadeEstoque - item.quantidadePedido
+        console.log('Estoque ' + (quantidadeEstoque - item.quantidadePedido))
+        if(estoque <= 0) {
+          console.log('não dá pra comprar o que não tem')
+          itemAdicionarMaisUm = false
+          adicionar = false;
+        } else {
+          item.quantidadePedido++
+          itemAdicionarMaisUm = true
+        }
+      }
+    })
+
+    if(itemAdicionarMaisUm) {
+      console.log('Adicionando mais um!')
+      setCarrinho([...itens])
+
+    } else {
+      if(adicionar) {
+        setCarrinho([...itens, itemCarrinho])
+        toast({
+          title: 'Produto Adicionado ao Carrinho',
+          status: 'success',
+          duration: 1500,
+          isClosable: true,
+        }) 
+      }
+
+    }
+
+
+   
   }
   return ( 
     <Card maxW="sm">

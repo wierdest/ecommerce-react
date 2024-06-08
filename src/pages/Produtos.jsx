@@ -56,6 +56,8 @@ function Produtos() {
             imgUrl={produto.imgUrl}
             nome={produto.nome}
             preco={produto.preco}
+            quantidadeEstoque={produto.quantidade}
+            quantidadePedido={1}
           />
         ))}
       </SimpleGrid>

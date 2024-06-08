@@ -14,13 +14,24 @@ import {
 import SeletorQuantidade from '../SeletorQuantidade/SeletorQuantidade';
 import BotaoExcluir from '../BotaoExcluir/BotaoExcluir';
 
-function ItemCarrinho({id, imgUrl, nome, descricao, preco, quantidadePedido}) {
+function ItemCarrinho({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido}) {
     
     const {carrinho, setCarrinho} = useContext(CarrinhoContext)
 
     const handleExcluir = () => {
       console.log("ID do item carrinho " + id)
       setCarrinho(carrinho.filter((item) => item.id != id))
+    }
+
+    const handleAlteracaoQuantidade = (novaQuantidade ) => {
+
+      var itens = [...carrinho]
+      var item = itens[index]
+      console.log('Alterando quantidade do item ', index, 'que é ', item.quantidadePedido,  'para ', novaQuantidade)
+      console.log('Item nome ', itens[index].nome)
+      item.quantidadePedido = novaQuantidade
+      setCarrinho(itens)
+    
     }
 
     return (
@@ -40,9 +51,7 @@ function ItemCarrinho({id, imgUrl, nome, descricao, preco, quantidadePedido}) {
             <CardBody>
               <HStack>
                   <Heading size='sm'>{nome}</Heading>
-
                   <BotaoExcluir handleExcluir={handleExcluir} />
-
               </HStack>
               <Text py='2'>
                   R$ {preco}
@@ -50,7 +59,11 @@ function ItemCarrinho({id, imgUrl, nome, descricao, preco, quantidadePedido}) {
             </CardBody>
 
             <CardFooter>
-                <SeletorQuantidade/>
+                <SeletorQuantidade 
+                  quantidadeInicial={quantidadePedido} 
+                  quantidadeMaxima={quantidadeEstoque}
+                  setQuantidadePedido={handleAlteracaoQuantidade}
+                />
             </CardFooter>
         </Stack>
         </Card>

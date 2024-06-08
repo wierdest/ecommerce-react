@@ -56,11 +56,13 @@ function CarrinhoModal() {
                 carrinho.map((itemCarrinho, index) => (
                   <ItemCarrinho
                     key={index}
+                    index={index}
                     id={itemCarrinho.id}
                     imgUrl={itemCarrinho.imgUrl}
                     nome={itemCarrinho.nome}
                     preco={itemCarrinho.preco}
                     quantidadePedido={itemCarrinho.quantidadePedido}
+                    quantidadeEstoque={itemCarrinho.quantidadeEstoque}
                   />
                 ))
               }
