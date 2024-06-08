@@ -6,7 +6,7 @@ import { api } from '../api/api'
 
 function Cadastro() {
 
-    const {nome, email,  estaLogado, setNome, setEmail, setEstaLogado} = useContext(LogadoContext)
+    const {nome, email,  estaLogado, setNome, setEmail, setEstaLogado, setId} = useContext(LogadoContext)
     const [senha, setSenha] = useState('')
     const [message, setMessage] = useState('');
     const history = useHistory()
@@ -43,6 +43,7 @@ function Cadastro() {
             )
             if(response.status == 201) {
                 console.log('Cadastrou com sucesso!');
+                setId(response.data.id)
                 // joga usuario para o home
                 setEstaLogado(true)
                 history.push('/')

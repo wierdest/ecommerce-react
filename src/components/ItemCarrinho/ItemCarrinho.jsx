@@ -12,7 +12,7 @@ import {
     Button,
   } from '@chakra-ui/react';
 
-function ItemCarrinho({imgUrl, nome, descricao, preco}) {
+function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
     return (
       <>
         <Card

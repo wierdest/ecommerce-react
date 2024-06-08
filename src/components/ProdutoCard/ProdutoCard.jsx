@@ -20,7 +20,7 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}
   const history = useHistory()
   const {carrinho, setCarrinho} = useContext(CarrinhoContext)
   const handleComprar = () => {
-    var itemCarrinho = {imgUrl, nome, descricao, preco}
+    var itemCarrinho = {id, imgUrl, nome, descricao, preco}
     setCarrinho([...carrinho, itemCarrinho])
     console.log(carrinho)
   }

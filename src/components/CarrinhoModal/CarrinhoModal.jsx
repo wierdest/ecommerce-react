@@ -19,7 +19,7 @@ function CarrinhoModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const history = useHistory()
     const {carrinho, setCarrinho} = useContext(CarrinhoContext)
-
+    //usar o set carrinho para atualizar a quantidade de cada produto no pedido
     const handleComprar = () => {
       console.log("Comprou!!")
       history.push("/pedido")
@@ -52,6 +52,7 @@ function CarrinhoModal() {
                   imgUrl={itemCarrinho.imgUrl}
                   nome={itemCarrinho.nome}
                   preco={itemCarrinho.preco}
+                  quantidadePedido={itemCarrinho.quantidadePedido}
                 />
               ))}
             </ModalBody>
