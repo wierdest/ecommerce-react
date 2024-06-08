@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardHeader,
@@ -26,14 +27,21 @@ function ProdutoCard({
   quantidade,
 }) {
   const history = useHistory();
-  const gerarEstrelasAleatorias = () => Math.floor(Math.random() * 5) + 1;
-
   const { carrinho, setCarrinho } = useContext(CarrinhoContext);
+  const [estrelas, setEstrelas] = useState(0);
+
+  useEffect(() => {
+    // Gera estrelas aleatórias apenas uma vez, quando o componente é montado
+    const gerarEstrelasAleatorias = () => Math.floor(Math.random() * 5) + 1;
+    setEstrelas(gerarEstrelasAleatorias());
+  }, []); // O segundo argumento vazio garante que este efeito só seja executado uma vez, quando o componente é montado
+
   const handleComprar = () => {
     var itemCarrinho = { id, imgUrl, nome, descricao, preco };
     setCarrinho([...carrinho, itemCarrinho]);
     console.log(carrinho);
   };
+
   return (
     <Card maxW="sm">
       <CardBody>
@@ -49,14 +57,14 @@ function ProdutoCard({
         <Stack mt="6" spacing="3">
           <Heading size="md">{nome}</Heading>
           <Text>{descricao}</Text>
-          <Text color="blue.600" fontSize="2xl">
+          <Text color="white.600" fontSize="2xl">
             {preco !== undefined
               ? `R$ ${preco.toFixed(2)}`
               : 'Preço não disponível'}
           </Text>
         </Stack>
         <Stack direction="row" spacing={1} justify="center" align="center">
-          {[...Array(gerarEstrelasAleatorias())].map((_, index) => (
+          {[...Array(estrelas)].map((_, index) => (
             <StarIcon key={index} color="yellow.400" w={6} h={6} />
           ))}
         </Stack>
