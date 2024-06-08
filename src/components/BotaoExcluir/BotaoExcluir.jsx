@@ -1,7 +1,7 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { IconButton } from '@chakra-ui/react'
 
-function BotaoExcluir() {
+function BotaoExcluir( { handleExcluir }) {
     return (
       <>
         <IconButton

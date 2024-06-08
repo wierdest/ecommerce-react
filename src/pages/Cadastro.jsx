@@ -18,7 +18,7 @@ function Cadastro() {
             history.push('/')
         }
     },[] )
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(nome == "") {

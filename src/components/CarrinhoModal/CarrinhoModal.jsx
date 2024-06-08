@@ -47,14 +47,12 @@ function CarrinhoModal() {
 
               {
                 carrinho.length == 0
-                
                 ?
-
                 <Flex justifyContent="center" alignItems="center" w="100%">
                   <PiShoppingCart fontSize={64} />
                 </Flex>
                 :
-                
+
                 carrinho.map((itemCarrinho, index) => (
                   <ItemCarrinho
                     key={index}

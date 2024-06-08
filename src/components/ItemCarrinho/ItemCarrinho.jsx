@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { CarrinhoContext } from '../../context/CarrinhoContext';
 import {
     Card,
     CardBody,
@@ -13,6 +15,14 @@ import SeletorQuantidade from '../SeletorQuantidade/SeletorQuantidade';
 import BotaoExcluir from '../BotaoExcluir/BotaoExcluir';
 
 function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
+    
+    const {carrinho, setCarrinho} = useContext(CarrinhoContext)
+
+    const handleExcluir = (index) => {
+
+      setCarrinho(carrinho.filter)
+    }
+
     return (
       <>
         <Card
@@ -35,7 +45,6 @@ function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
               <Text py='2'>
                   R$ {preco}
               </Text>
-               
             </CardBody>
 
             <CardFooter>
