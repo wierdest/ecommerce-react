@@ -4,24 +4,23 @@ const LogadoContext = createContext();
 
 const LogadoProvider = ({children}) => {
     
-    const [estaLogado, setEstaLogado] = useState(false)
+    const [estaLogado, setEstaLogado] = useState(() => {
+        const logado = localStorage.getItem('estaLogado');
+        return logado === 'true';
+    })
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
+    const [id, setId] = useState('')
 
-    // useEffect(() => {
-    //     const logado = localStorage.getItem('estaLogado');
-    //     if (logado === 'true') {
-    //         console.log("LOGADO");
-    //         setEstaLogado(true);
-    //     } else {
-    //         console.log('NAO LOGADO')
-    //     }
-    // }, []);
+    useEffect(() => {
+        localStorage.setItem('estaLogado', estaLogado);
+    }, [estaLogado]);
+    
     return(
-        <LogadoContext.Provider value={{estaLogado, nome, email, setEstaLogado, setNome, setEmail}}>
+        <LogadoContext.Provider value={{estaLogado, nome, email, id, setEstaLogado, setNome, setEmail, setId}}>
             {children}
         </LogadoContext.Provider>
     )
 }
 
-export { LogadoContext, LogadoProvider }
+export { LogadoContext, LogadoProvider } 
