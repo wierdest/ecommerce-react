@@ -14,13 +14,13 @@ import {
 import SeletorQuantidade from '../SeletorQuantidade/SeletorQuantidade';
 import BotaoExcluir from '../BotaoExcluir/BotaoExcluir';
 
-function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
+function ItemCarrinho({id, imgUrl, nome, descricao, preco, quantidadePedido}) {
     
     const {carrinho, setCarrinho} = useContext(CarrinhoContext)
 
-    const handleExcluir = (index) => {
-
-      setCarrinho(carrinho.filter)
+    const handleExcluir = () => {
+      console.log("ID do item carrinho " + id)
+      setCarrinho(carrinho.filter((item) => item.id != id))
     }
 
     return (
@@ -40,7 +40,9 @@ function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
             <CardBody>
               <HStack>
                   <Heading size='sm'>{nome}</Heading>
-                  <BotaoExcluir />
+
+                  <BotaoExcluir handleExcluir={handleExcluir} />
+
               </HStack>
               <Text py='2'>
                   R$ {preco}

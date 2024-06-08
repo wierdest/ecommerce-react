@@ -11,6 +11,7 @@ function BotaoExcluir( { handleExcluir }) {
             aria-label='Done'
             fontSize='18px'
             size="sm"
+            onClick={handleExcluir}
             icon={<DeleteIcon />}
         />
       

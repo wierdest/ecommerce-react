@@ -52,7 +52,8 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}
           display="block"
           mx="auto"
         />
-        <Stack mt="6" spacing="3">
+      </CardBody>
+      <Stack mt="6" spacing="3">
           <Heading size="md">{nome}</Heading>
           <Text>{descricao}</Text>
           <Text color="white.600" fontSize="2xl">
@@ -61,12 +62,11 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}
               : 'Preço não disponível'}
           </Text>
         </Stack>
-        <Stack direction="row" spacing={1} justify="center" align="center">
+        <Stack direction="row" spacing={1} justify="center" align="center" mb="4">
           {[...Array(estrelas)].map((_, index) => (
             <StarIcon key={index} color="yellow.400" w={6} h={6} />
           ))}
         </Stack>
-      </CardBody>
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
