@@ -10,6 +10,7 @@ import {
   Divider,
   ButtonGroup,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router-dom';
@@ -18,11 +19,17 @@ import { CarrinhoContext } from '../../context/CarrinhoContext';
 
 function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}) {
   const history = useHistory()
+  const toast = useToast()
   const {carrinho, setCarrinho} = useContext(CarrinhoContext)
   const handleComprar = () => {
     var itemCarrinho = {id, imgUrl, nome, descricao, preco}
     setCarrinho([...carrinho, itemCarrinho])
-    console.log(carrinho)
+    toast({
+      title: 'Produto Adicionado ao Carrinho',
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    }) 
   }
   return ( 
     <Card maxW="sm">

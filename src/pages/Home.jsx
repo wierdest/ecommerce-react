@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
 import { Redirect, useHistory } from 'react-router-dom';
 import { LogadoContext } from '../context/LogadoContext';
-import { Box } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import Navbar from '../components/Navbar/Navbar';
+import myImage from '../assets/img/logoserrashop.png'
 
 
 function Home() {
@@ -16,14 +17,30 @@ function Home() {
   }, []);
   return (
     <>
-      <Navbar />
-      <Box
-        height="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <h1>HOME PAGE</h1>
+      <Box marginRight='30px'>
+      <Image
+        src={myImage}
+        width='30%'
+   
+      />
+      </Box>
+      <Navbar   />
+      {/* aqui entrara a categoria dos itens e o filter de cada um, se der tempo */}
+      <Box as="li">
+        <Image
+          borderRadius='full'
+          boxSize='250px'
+          src=''/>
+        <Image
+          borderRadius='full'
+          boxSize='250px'
+          src=''
+        />
+        <Image
+          borderRadius='full'
+          boxSize='250px'
+          src=''
+        />
       </Box>
     </>
   );

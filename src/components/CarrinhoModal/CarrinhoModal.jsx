@@ -8,7 +8,8 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Button
+    Button,
+    useToast
   } from '@chakra-ui/react'
 import { useContext } from 'react';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
@@ -16,12 +17,12 @@ import { useHistory } from 'react-router-dom'
 import ItemCarrinho from '../ItemCarrinho/ItemCarrinho';
 
 function CarrinhoModal() {
+    const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const history = useHistory()
     const {carrinho, setCarrinho} = useContext(CarrinhoContext)
     //usar o set carrinho para atualizar a quantidade de cada produto no pedido
     const handleComprar = () => {
-      console.log("Comprou!!")
       history.push("/pedido")
     }
     
