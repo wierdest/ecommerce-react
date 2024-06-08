@@ -1,12 +1,23 @@
 import { SimpleGrid, Input, Box } from '@chakra-ui/react';
 import ProdutoCard from '../components/ProdutoCard/ProdutoCard';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { LogadoContext } from '../context/LogadoContext';
 import { api } from '../api/api';
 import Navbar from '../components/Navbar/Navbar';
+import { useHistory } from 'react-router-dom';
 
 function Produtos() {
   const [produtos, setProdutos] = useState([]);
   const [filtro, setFiltro] = useState('');
+
+  const { estaLogado } = useContext(LogadoContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!estaLogado) {
+      history.push('/login');
+    }
+  }, [estaLogado, history]);
 
   const obterTodos = async () => {
     try {
