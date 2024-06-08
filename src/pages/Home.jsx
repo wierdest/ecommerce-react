@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { LogadoContext } from '../context/LogadoContext';
 import { Box, Image } from '@chakra-ui/react';
 import Navbar from '../components/Navbar/Navbar';
-import myImage from '../assets/img/logoserrashop.png'
 
 function Home() {
   const { estaLogado } = useContext(LogadoContext);
@@ -21,7 +20,7 @@ function Home() {
       <div>
         <img
           src="https://media.discordapp.net/attachments/1211771660508733471/1248731657658437632/image.png?ex=6664bb7b&is=666369fb&hm=ed43213a54919e9e2fd29f3ad96d35b0614fb1bbab4b23fa25282d6c9ecd3739&=&format=webp&quality=lossless"
-          alt=""
+          alt="Descricao da imagem"
           height="100%"
           width="100%"
           display="flex"
