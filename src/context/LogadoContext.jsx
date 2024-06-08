@@ -10,13 +10,14 @@ const LogadoProvider = ({children}) => {
     })
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
+    const [id, setId] = useState('')
 
     useEffect(() => {
         localStorage.setItem('estaLogado', estaLogado);
     }, [estaLogado]);
     
     return(
-        <LogadoContext.Provider value={{estaLogado, nome, email, setEstaLogado, setNome, setEmail}}>
+        <LogadoContext.Provider value={{estaLogado, nome, email, id, setEstaLogado, setNome, setEmail, setId}}>
             {children}
         </LogadoContext.Provider>
     )

@@ -6,7 +6,7 @@ import { api } from '../api/api'
 
 
 function Login() {
-    const {nome, email, setEstaLogado, setNome, setEmail} = useContext(LogadoContext)
+    const {nome, email, setEstaLogado, setNome, setEmail, setId} = useContext(LogadoContext)
     const history = useHistory()
     // esses estados são locais, só da pagina de login, certo?
     const [senha, setSenha] = useState('');
@@ -28,6 +28,7 @@ function Login() {
                     console.log('Usuário encontrado:', usuario)
                     setNome(usuario.nome)
                     setEmail(usuario.email)
+                    setId(usuario.id)
                     
                     localStorage.setItem('estaLogado', true)
                     setEstaLogado(true);
