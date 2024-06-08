@@ -1,4 +1,4 @@
-import { Button, Box } from '@chakra-ui/react';
+import { Button, Box, useToast } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { CarrinhoContext } from '../context/CarrinhoContext';
 import ItemCarrinho from '../components/ItemCarrinho/ItemCarrinho';
@@ -11,6 +11,7 @@ function Pedido() {
   const history = useHistory()
   const {carrinho, setCarrinho} = useContext(CarrinhoContext)
   const {id} = useContext(LogadoContext)
+  const toast = useToast()
 
   const handleComprar = async () => {
     console.log('cadastrando um pedido no database')
@@ -23,13 +24,22 @@ function Pedido() {
           idProduto: itemCarrinho.id,
           quantidade: itemCarrinho.quantidadePedido,
         }
-      )    
-    })
+      )
+         
+    }) 
+
+    toast({
+      title: 'Compra Finalizada com sucesso',
+      description: "Pedido encaminhado!",
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    }) 
 
     try {
       const response = await api.post('/pedido/',
           {
-              valorTotal: valorTotal.toFixed(2),
+              valorTotal: parseFloat(valorTotal).toFixed(2),
               idUser: id,
               itens: itensPedido 
           }

@@ -1,8 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { LogadoContext } from '../context/LogadoContext';
-import { Box } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import Navbar from '../components/Navbar/Navbar';
+import myImage from '../assets/img/logoserrashop.png'
 
 function Home() {
   const { estaLogado } = useContext(LogadoContext);

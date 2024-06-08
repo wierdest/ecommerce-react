@@ -1,6 +1,6 @@
 import { React, useContext, useState, useEffect  } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button, Input, FormControl, FormLabel, Heading, Box, Text } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel, Heading, Box, Text, useToast } from '@chakra-ui/react';
 import { LogadoContext } from "../context/LogadoContext"
 import { api } from '../api/api'
 
@@ -10,6 +10,7 @@ function Cadastro() {
     const [senha, setSenha] = useState('')
     const [message, setMessage] = useState('');
     const history = useHistory()
+    const toast = useToast()
 
     useEffect(() => {
         if(estaLogado) {
@@ -84,7 +85,15 @@ function Cadastro() {
                 onChange={(e) => setSenha(e.target.value)}
               />
             </FormControl>
-            <Button colorScheme="green" type="submit" width="full">Cadastrar</Button>
+            <Button colorScheme="green" type="submit" width="full" onClick={() => {
+              toast({
+                title: 'Conta criada.',
+                description: "Todos os dados salvos!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+              })
+            }}>Cadastrar</Button>
           </form>
           {message && <Text mt={4} color="red.500">{message}</Text>}
           <br/>
