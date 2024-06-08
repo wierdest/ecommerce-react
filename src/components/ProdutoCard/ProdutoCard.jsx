@@ -21,7 +21,15 @@ import { CarrinhoContext } from '../../context/CarrinhoContext';
 function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidade}) {
   const history = useHistory()
   const toast = useToast()
+
+  const [estrelas, setEstrelas] = useState(0)
+
   const {carrinho, setCarrinho} = useContext(CarrinhoContext)
+
+  useEffect(() => {
+    const gerarEstrelasAleatorias = () => Math.floor(Math.random() * 5) + 1;
+    setEstrelas(gerarEstrelasAleatorias());
+  }, []);
   const handleComprar = () => {
     var itemCarrinho = {id, imgUrl, nome, descricao, preco}
     setCarrinho([...carrinho, itemCarrinho])

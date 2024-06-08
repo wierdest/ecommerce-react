@@ -12,7 +12,7 @@ import {
   } from '@chakra-ui/react'
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 import ItemCarrinho from '../ItemCarrinho/ItemCarrinho';
-
+import { useHistory } from 'react-router-dom'
 function CarrinhoModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const history = useHistory()
