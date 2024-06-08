@@ -10,6 +10,7 @@ import Produtos from './pages/Produtos'
 import Pedido from './pages/Pedido'
 import ProdutoEspecifico from './pages/ProdutoEspecifico'
 import { CarrinhoProvider } from './context/CarrinhoContext'
+import FinalizarCompra from './pages/FinalizarCompra'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/produtos" component={Produtos} />
             <Route path="/produtos/:id" component={ProdutoEspecifico} />
             <Route exact path="/pedido" component={Pedido} />
+            <Route exact path="/finalizar-compra" component={FinalizarCompra}/>
             <Route exact path="/" component={Home}/>
             <Route path="*" component={Erro404} />
           </Switch>
