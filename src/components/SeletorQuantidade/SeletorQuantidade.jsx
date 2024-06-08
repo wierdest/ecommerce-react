@@ -15,8 +15,6 @@ function SeletorQuantidade( { quantidadeInicial, quantidadeMaxima, setQuantidade
         max: quantidadeMaxima
     })
 
-    
-    
     const inc = getIncrementButtonProps()
     const dec = getDecrementButtonProps()
     const input = getInputProps()

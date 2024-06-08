@@ -8,7 +8,7 @@ import { Icon, createIcon } from '@chakra-ui/react'
 
 function Navbar() {
 
-  const { setEstaLogado } = useContext(LogadoContext)
+  const { estaLogado, setEstaLogado } = useContext(LogadoContext)
 
   const handleLogout = () => {
 
@@ -26,11 +26,16 @@ function Navbar() {
           Home
         </Link>
       </Box>
-      <Box as="li">
-        <Link as={NavLink} to="/cadastro" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
-          Cadastro
-        </Link>
-      </Box>
+
+      {
+
+        !estaLogado && <Box as="li">
+                          <Link as={NavLink} to="/cadastro" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
+                            Cadastro
+                          </Link>
+                        </Box>
+
+      }
       <Box as="li">
         <Link as={NavLink} to="/produtos" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
           Produtos
