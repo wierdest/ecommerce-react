@@ -6,7 +6,7 @@ import { api } from '../api/api'
 
 function Cadastro() {
 
-    const {nome, email,  estaLogado, setNome, setEmail, setEstaLogado, setId} = useContext(LogadoContext)
+    const {nome, email,  id, estaLogado, setNome, setEmail, setEstaLogado, setId} = useContext(LogadoContext)
     const [senha, setSenha] = useState('')
     const [message, setMessage] = useState('');
     const history = useHistory()
@@ -14,7 +14,7 @@ function Cadastro() {
 
     useEffect(() => {
         if(estaLogado) {
-            console.log('JÁ ESTÁ LOGADO')
+            console.log('JÁ ESTÁ LOGADO ' + id)
             history.push('/')
         }
     },[] )
@@ -43,10 +43,10 @@ function Cadastro() {
                 }
             )
             if(response.status == 201) {
-                console.log('Cadastrou com sucesso!');
+                console.log('Cadastrou usuario com sucesso com id: ', response.data.id );
                 setId(response.data.id)
                 // joga usuario para o home
-                setEstaLogado(true)
+                setEstaLogado(response.data.id)
                 history.push('/')
             }
 

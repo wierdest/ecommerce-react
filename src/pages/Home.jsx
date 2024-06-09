@@ -5,7 +5,7 @@ import { Box, Image } from '@chakra-ui/react';
 import Navbar from '../components/Navbar/Navbar';
 
 function Home() {
-  const { estaLogado } = useContext(LogadoContext);
+  const { estaLogado, id } = useContext(LogadoContext);
   const history = useHistory();
 
   useEffect(() => {

@@ -20,7 +20,6 @@ function Pedido() {
     carrinho.forEach((itemCarrinho) => {
       valorTotal += itemCarrinho.preco;
       itensPedido.push({
-        idUser: id,
         idProduto: itemCarrinho.id,
         quantidade: itemCarrinho.quantidadePedido,
       });

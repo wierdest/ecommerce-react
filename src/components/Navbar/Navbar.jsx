@@ -6,15 +6,17 @@ import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
 import { FiLogOut } from 'react-icons/fi';
 import { Icon, createIcon } from '@chakra-ui/react'
 import MenuCategoria from '../MenuCategoria/MenuCategoria';
+import { CarrinhoContext } from '../../context/CarrinhoContext';
 
 function Navbar() {
 
-  const { estaLogado, setEstaLogado } = useContext(LogadoContext)
+  const { estaLogado, setEstaLogado, nome } = useContext(LogadoContext)
+  const { carrinho } = useContext(CarrinhoContext)
 
   const handleLogout = () => {
 
-    setEstaLogado(false)
-    localStorage.setItem('estaLogado', false)
+
+    localStorage.removeItem('estaLogado')
     window.location.reload()
   }
 
@@ -22,6 +24,11 @@ function Navbar() {
     
     <Box className='navBarClass' as="nav" bg="black.200" color="white" p={5} w="100 vw" >
     <Flex as="ul" listStyleType="none" m={0} p={0} alignItems="center" gap={10}>
+      {
+        estaLogado && nome && <Box as="li">Olá, {nome}, relaxe. Temos o que vc precisa </Box>
+
+      }
+      
       <Box as="li">
         <MenuCategoria/>
       </Box>
@@ -51,9 +58,11 @@ function Navbar() {
         </Link>
         </Box>
       <Spacer />
-      <Box as="li">
-        <CarrinhoModal />
-      </Box>
+      {
+        carrinho.length > 0 &&  <Box as="li"> <CarrinhoModal /> </Box>
+
+      }
+     
       <Box as="li">
         <IconButton onClick={handleLogout} icon={<FiLogOut/>} aria-label="Logout" />
       </Box>
