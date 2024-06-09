@@ -17,12 +17,12 @@ function MenuCategoria() {
   ]
   return (
       <Menu>
+
       <MenuButton
         as={IconButton}
         aria-label='Options'
-        icon={<HamburgerIcon />}
-        variant='outline'
-      />
+        variant='ghost'
+      >Categorias</MenuButton>
       <MenuList>
         <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[0])} icon={<AddIcon />}>
           Eletrônicos

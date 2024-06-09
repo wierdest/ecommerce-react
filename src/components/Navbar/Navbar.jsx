@@ -23,10 +23,9 @@ function Navbar() {
     <Box className='navBarClass' as="nav" bg="black.200" color="white" p={5} w="100 vw" >
     <Flex as="ul" listStyleType="none" m={0} p={0} alignItems="center" gap={10}>
       {
-        estaLogado && nome && <Box as="li">Olá, {nome}, relaxe. Temos o que vc precisa </Box>
+        estaLogado && nome && <Box as="li">Olá, {nome}</Box>
 
       }
-      
       <Box as="li">
         <MenuCategoria/>
       </Box>
