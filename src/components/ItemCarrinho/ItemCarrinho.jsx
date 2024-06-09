@@ -23,7 +23,7 @@ function ItemCarrinho({index, id, imgUrl, nome, descricao, preco, quantidadeEsto
       setCarrinho(carrinho.filter((item) => item.id != id))
     }
 
-    const handleAlteracaoQuantidade = (novaQuantidade ) => {
+    const handleAlteracaoQuantidade = (novaQuantidade) => {
 
       var itens = [...carrinho]
       var item = itens[index]
@@ -31,7 +31,7 @@ function ItemCarrinho({index, id, imgUrl, nome, descricao, preco, quantidadeEsto
       console.log('Item nome ', itens[index].nome)
       item.quantidadePedido = novaQuantidade
       setCarrinho(itens)
-    
+      
     }
 
     return (

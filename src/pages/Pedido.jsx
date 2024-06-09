@@ -12,6 +12,15 @@ function Pedido() {
   const { id } = useContext(LogadoContext);
   const toast = useToast();
 
+  const atualizarEstoque = async (id, quantidadeEstoque, novaQuantidade) => {
+    try {
+        await api.patch(`/produto/${id}`, { quantidadeEstoque: (quantidadeEstoque - novaQuantidade) });
+        console.log('Estoque atualizado com sucesso');
+    } catch (error) {
+        console.error('Erro ao atualizar estoque', error);
+    }
+};
+
   const handleComprar = async () => {
     console.log('cadastrando um pedido no database');
     let valorTotal = 0;
@@ -40,8 +49,13 @@ function Pedido() {
         itens: itensPedido,
       });
       if (response.status === 201) {
+        var itens = [...carrinho]
         console.log('Pedido efetuado com sucesso!');
         history.push('/finalizar-compra');
+        console.log(carrinho)
+        carrinho.forEach((item) => {
+          atualizarEstoque(item.id, item.quantidadeEstoque, item.quantidadePedido);
+        });
       }
     } catch (error) {
       console.error('Erro ao fazer o post de cadastro!', error);
@@ -94,8 +108,8 @@ function Pedido() {
           width="100%"
           maxWidth="700px"
         >
-          Finalizar Compra
-        </Button>
+          Finalizar  Compra
+        </Button >
       </Flex>
     </>
   );
