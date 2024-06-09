@@ -4,14 +4,14 @@ import { useEffect, useState, useContext } from 'react';
 import { LogadoContext } from '../context/LogadoContext';
 import { api } from '../api/api';
 import Navbar from '../components/Navbar/Navbar';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-function Produtos() {
+function ProdutosCategoria() {
+
   const [produtos, setProdutos] = useState([]);
-  const [filtro, setFiltro] = useState('');
-
   const { estaLogado } = useContext(LogadoContext);
   const history = useHistory();
+  const { categoria } = useParams()
 
   useEffect(() => {
     if (!estaLogado) {
@@ -22,21 +22,18 @@ function Produtos() {
   const obterTodos = async () => {
     try {
       const response = await api.get('/produto');
-      setProdutos(response.data);
+      var produtosFiltrados = response.data.filter((produto) => produto.categoria == categoria);
+      console.log(produtosFiltrados)
+      setProdutos(produtosFiltrados);
+
     } catch (erro) {
-      console.error('Ocorreu um erro obtendo os produtos', erro);
+      console.error('Ocorreu um erro obtendo os produtos da categoria ', categoria, erro);
     }
   };
 
   useEffect(() => {
     obterTodos();
   }, []);
-
-  const filtrarProdutos = () => {
-    return produtos.filter((produto) =>
-      produto.nome.toLowerCase().includes(filtro.toLowerCase())
-    );
-  };
 
   return (
     <>
@@ -47,20 +44,9 @@ function Produtos() {
         alignItems="center"
         paddingLeft="2rem"
       >
-        <Input
-          placeholder="Pesquisar produto..."
-          value={filtro}
-          onChange={(e) => setFiltro(e.target.value)}
-          mb={4}
-          sx={{
-            width: '350px',
-            fontSize: 'sm',
-            padding: '1rem 1rem',
-          }}
-        />
       </Box>
       <SimpleGrid spacing={4} templateColumns="repeat(3,1fr)">
-        {filtrarProdutos().map((produto) => (
+        {produtos.map((produto) => (
           <ProdutoCard
             key={produto.id}
             id={produto.id}
@@ -77,4 +63,4 @@ function Produtos() {
   );
 }
 
-export default Produtos;
+export default ProdutosCategoria;

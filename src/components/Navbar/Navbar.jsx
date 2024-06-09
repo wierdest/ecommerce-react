@@ -5,6 +5,7 @@ import { LogadoContext } from '../../context/LogadoContext';
 import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
 import { FiLogOut } from 'react-icons/fi';
 import { Icon, createIcon } from '@chakra-ui/react'
+import MenuCategoria from '../MenuCategoria/MenuCategoria';
 
 function Navbar() {
 
@@ -21,6 +22,9 @@ function Navbar() {
     
     <Box className='navBarClass' as="nav" bg="black.200" color="white" p={5} w="100 vw" >
     <Flex as="ul" listStyleType="none" m={0} p={0} alignItems="center" gap={10}>
+      <Box as="li">
+        <MenuCategoria/>
+      </Box>
       <Box as="li">
         <Link as={NavLink} to="/" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'white.300' }}>
           Home

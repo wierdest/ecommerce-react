@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
+  Badge,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Stack,
@@ -84,10 +84,13 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
           objectFit="contain"
           display="block"
           mx="auto"
+          mb="4"
         />
+          <Badge mb="4" colorScheme='red'>{categoria}</Badge>
+         <Heading size="md">{nome}</Heading>
       </CardBody>
       <Stack mt="6" spacing="3">
-          <Heading size="md">{nome}</Heading>
+         
           <Text>{descricao}</Text>
           <Text color="white.600" fontSize="2xl">
             {preco !== undefined
