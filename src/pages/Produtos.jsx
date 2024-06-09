@@ -22,7 +22,8 @@ function Produtos() {
   const obterTodos = async () => {
     try {
       const response = await api.get('/produto');
-      setProdutos(response.data);
+
+      setProdutos(response.data.filter((produto) => produto.quantidade > 0));
     } catch (erro) {
       console.error('Ocorreu um erro obtendo os produtos', erro);
     }

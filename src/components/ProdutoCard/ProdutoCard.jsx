@@ -32,7 +32,18 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
   }, []);
 
   const handleComprar = () => {
+
     var itemCarrinho = {id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido}
+
+    if(quantidadeEstoque <= 0) {
+      toast({
+        title: 'Quantidade excedida',
+        status: 'error',
+        duration: 1500,
+        isClosable: true,
+      })
+      return;
+    }
 
     var itens = [...carrinho]
     var itemAdicionarMaisUm = false
@@ -112,17 +123,18 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
       <CardFooter>
         <ButtonGroup spacing="2">
           <Button
+            variant="ghost"
             onClick={() => {
               {
                 history.push(`/produtos/${id}`);
               }
             }}
-            variant="solid"
+            
             colorScheme="blue"
           >
             Saber Mais
           </Button>
-          <Button onClick={handleComprar} variant="ghost" colorScheme="blue">
+          <Button onClick={handleComprar} variant="solid" colorScheme="blue">
             Comprar
           </Button>
         </ButtonGroup>

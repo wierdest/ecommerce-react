@@ -17,8 +17,9 @@ function Pedido() {
 
   const atualizarEstoque = async (id, quantidadeEstoque, novaQuantidade) => {
     try {
-        await api.patch(`/produto/${id}`, { quantidadeEstoque: (quantidadeEstoque - novaQuantidade) });
-        console.log('Estoque atualizado com sucesso');
+        const response = await api.patch(`/produto/${id}`, { quantidade: (quantidadeEstoque - novaQuantidade) });
+
+        console.log('Estoque atualizado com sucesso ', response.data);
     } catch (error) {
         console.error('Erro ao atualizar estoque', error);
     }
@@ -52,7 +53,7 @@ function Pedido() {
         itens: itensPedido,
       });
       if (response.status === 201) {
-        var itens = [...carrinho]
+  
         console.log('Pedido efetuado com sucesso!');
         history.push('/finalizar-compra');
         console.log(carrinho)

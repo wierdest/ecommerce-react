@@ -25,7 +25,6 @@ function SeuPedido({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque
     setCarrinho(carrinho.filter((item) => item.id != id))
   }
 
-
   return (
     <>
       <Card
@@ -46,7 +45,6 @@ function SeuPedido({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque
                 <CardBody>
                 <HStack>
                     <Heading size='sm'>{nome}</Heading>
-                    <BotaoExcluir handleExcluirItem={handleExcluirItem} />
                 </HStack>
                 <Text fontSize='xl'>
                     Quantidade: {quantidadePedido}
