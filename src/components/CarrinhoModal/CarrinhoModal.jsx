@@ -1,4 +1,4 @@
-import { React, useRef } from 'react'
+import { React, useRef, useContext } from 'react';
 import {
     Modal,
     ModalOverlay,
@@ -8,12 +8,13 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Button
-  } from '@chakra-ui/react'
-import { useContext } from 'react';
+    Button,
+    Flex
+} from '@chakra-ui/react'
+import { PiShoppingCart } from "react-icons/pi";
 import { CarrinhoContext } from '../../context/CarrinhoContext';
-import { useHistory } from 'react-router-dom'
 import ItemCarrinho from '../ItemCarrinho/ItemCarrinho';
+import { useHistory } from 'react-router-dom'
 
 function CarrinhoModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -25,11 +26,9 @@ function CarrinhoModal() {
       history.push("/pedido")
     }
     
-    
     const btnRef = useRef(null)
     return (
       <>
-  
         <Button ref={btnRef} onClick={onOpen}>
           Carrinho
         </Button>
@@ -42,23 +41,42 @@ function CarrinhoModal() {
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>Meu carrinho</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              
-              {carrinho.map((itemCarrinho, index) => (
-                <ItemCarrinho
-                  key={index}
-                  imgUrl={itemCarrinho.imgUrl}
-                  nome={itemCarrinho.nome}
-                  preco={itemCarrinho.preco}
-                  quantidadePedido={itemCarrinho.quantidadePedido}
-                />
-              ))}
+
+              {
+                carrinho.length == 0
+                ?
+                <Flex justifyContent="center" alignItems="center" w="100%">
+                  <PiShoppingCart fontSize={64} />
+                </Flex>
+                :
+
+                carrinho.map((itemCarrinho, index) => (
+                  <ItemCarrinho
+                    key={index}
+                    index={index}
+                    id={itemCarrinho.id}
+                    imgUrl={itemCarrinho.imgUrl}
+                    nome={itemCarrinho.nome}
+                    preco={itemCarrinho.preco}
+                    quantidadePedido={itemCarrinho.quantidadePedido}
+                    quantidadeEstoque={itemCarrinho.quantidadeEstoque}
+                  />
+                ))
+              }
+
             </ModalBody>
             <ModalFooter>
-              <Button onClick={onClose}>Close</Button>
-              <Button onClick={handleComprar}>Finalizar compra</Button>
+            <Flex w="100%" justifyContent="flex-end" gap={4}>
+              <Button onClick={onClose}>Fechar</Button>
+              {
+                carrinho.length != 0 && <Button onClick={handleComprar}>Finalizar compra</Button>
+              }
+
+            </Flex>
+              
             </ModalFooter>
           </ModalContent>
         </Modal>

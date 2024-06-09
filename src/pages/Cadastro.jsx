@@ -1,23 +1,24 @@
 import { React, useContext, useState, useEffect  } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button, Input, FormControl, FormLabel, Heading, Box, Text } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel, Heading, Box, Text, useToast } from '@chakra-ui/react';
 import { LogadoContext } from "../context/LogadoContext"
 import { api } from '../api/api'
 
 function Cadastro() {
 
-    const {nome, email,  estaLogado, setNome, setEmail, setEstaLogado, setId} = useContext(LogadoContext)
+    const {nome, email,  id, estaLogado, setNome, setEmail, setEstaLogado, setId} = useContext(LogadoContext)
     const [senha, setSenha] = useState('')
     const [message, setMessage] = useState('');
     const history = useHistory()
+    const toast = useToast()
 
     useEffect(() => {
         if(estaLogado) {
-            console.log('JÁ ESTÁ LOGADO')
+            console.log('JÁ ESTÁ LOGADO ' + id)
             history.push('/')
         }
     },[] )
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(nome == "") {
@@ -42,10 +43,10 @@ function Cadastro() {
                 }
             )
             if(response.status == 201) {
-                console.log('Cadastrou com sucesso!');
+                console.log('Cadastrou usuario com sucesso com id: ', response.data.id );
                 setId(response.data.id)
                 // joga usuario para o home
-                setEstaLogado(true)
+                setEstaLogado(response.data.id)
                 history.push('/')
             }
 
@@ -84,7 +85,15 @@ function Cadastro() {
                 onChange={(e) => setSenha(e.target.value)}
               />
             </FormControl>
-            <Button colorScheme="green" type="submit" width="full">Cadastrar</Button>
+            <Button colorScheme="green" type="submit" width="full" onClick={() => {
+              toast({
+                title: 'Conta criada.',
+                description: "Todos os dados salvos!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+              })
+            }}>Cadastrar</Button>
           </form>
           {message && <Text mt={4} color="red.500">{message}</Text>}
           <br/>

@@ -1,18 +1,39 @@
+import { useContext } from 'react';
+import { CarrinhoContext } from '../../context/CarrinhoContext';
 import {
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
     Stack,
     Image,
     Heading,
     Text,
-    Divider,
-    ButtonGroup,
-    Button,
+    IconButton,
+    HStack
   } from '@chakra-ui/react';
+import SeletorQuantidade from '../SeletorQuantidade/SeletorQuantidade';
+import BotaoExcluir from '../BotaoExcluir/BotaoExcluir';
 
-function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
+function ItemCarrinho({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido}) {
+    
+    const {carrinho, setCarrinho} = useContext(CarrinhoContext)
+
+    const handleExcluir = () => {
+      console.log("ID do item carrinho " + id)
+      setCarrinho(carrinho.filter((item) => item.id != id))
+    }
+
+    const handleAlteracaoQuantidade = (novaQuantidade) => {
+
+      var itens = [...carrinho]
+      var item = itens[index]
+      console.log('Alterando quantidade do item ', index, 'que é ', item.quantidadePedido,  'para ', novaQuantidade)
+      console.log('Item nome ', itens[index].nome)
+      item.quantidadePedido = novaQuantidade
+      setCarrinho(itens)
+      
+    }
+
     return (
       <>
         <Card
@@ -26,20 +47,23 @@ function ItemCarrinho({imgUrl, nome, descricao, preco, quantidadePedido}) {
             src={imgUrl}
             alt='Caffe Latte'
         />
-
         <Stack>
             <CardBody>
-            <Heading size='md'>{nome}</Heading>
-
-            <Text py='2'>
-                {preco}
-            </Text>
+              <HStack>
+                  <Heading size='sm'>{nome}</Heading>
+                  <BotaoExcluir handleExcluir={handleExcluir} />
+              </HStack>
+              <Text py='2'>
+                  R$ {preco}
+              </Text>
             </CardBody>
 
             <CardFooter>
-            <Button variant='solid' colorScheme='blue'>
-                Buy Latte
-            </Button>
+                <SeletorQuantidade 
+                  quantidadeInicial={quantidadePedido} 
+                  quantidadeMaxima={quantidadeEstoque}
+                  setQuantidadePedido={handleAlteracaoQuantidade}
+                />
             </CardFooter>
         </Stack>
         </Card>
