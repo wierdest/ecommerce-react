@@ -1,10 +1,9 @@
 import { useContext } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import { Box, Button, Flex, Link, Spacer, IconButton } from "@chakra-ui/react";
+import { NavLink } from 'react-router-dom';
+import { Box, Flex, Link, Spacer, IconButton } from "@chakra-ui/react";
 import { LogadoContext } from '../../context/LogadoContext';
 import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
 import { FiLogOut } from 'react-icons/fi';
-import { Icon, createIcon } from '@chakra-ui/react'
 import MenuCategoria from '../MenuCategoria/MenuCategoria';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 

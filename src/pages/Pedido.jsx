@@ -1,7 +1,6 @@
 import { Button, Box, Flex, Heading, useToast, VStack, Divider, Text } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { CarrinhoContext } from '../context/CarrinhoContext';
-import ItemCarrinho from '../components/ItemCarrinho/ItemCarrinho';
 import { api } from '../api/api';
 import { LogadoContext } from '../context/LogadoContext';
 import { useHistory } from 'react-router-dom';

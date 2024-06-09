@@ -17,7 +17,6 @@ function MenuCategoria() {
   ]
   return (
       <Menu>
-
       <MenuButton
         as={IconButton}
         aria-label='Options'
