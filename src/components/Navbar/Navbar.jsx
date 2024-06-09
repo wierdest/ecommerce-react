@@ -14,8 +14,6 @@ function Navbar() {
   const { carrinho } = useContext(CarrinhoContext)
 
   const handleLogout = () => {
-
-
     localStorage.removeItem('estaLogado')
     window.location.reload()
   }
@@ -52,11 +50,14 @@ function Navbar() {
           Produtos
         </Link>
       </Box>
-      <Box as="li">
-        <Link as={NavLink} to="/pedidos" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
-          Pedidos
-        </Link>
-        </Box>
+      {
+        estaLogado &&  <Box as="li">
+                          <Link as={NavLink} to="/pedidos" _hover={{ textDecoration: 'underline' }} _activeLink={{ color: 'blue.300' }}>
+                            Pedidos
+                          </Link>
+                        </Box>
+      }
+     
       <Spacer />
       {
         carrinho.length > 0 &&  <Box as="li"> <CarrinhoModal /> </Box>
