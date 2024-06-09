@@ -1,14 +1,17 @@
-import { Button, Box, Flex, Heading, useToast, VStack, Divider } from '@chakra-ui/react';
+import { Button, Box, Flex, Heading, useToast, VStack, Divider, Text } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { CarrinhoContext } from '../context/CarrinhoContext';
 import ItemCarrinho from '../components/ItemCarrinho/ItemCarrinho';
 import { api } from '../api/api';
 import { LogadoContext } from '../context/LogadoContext';
 import { useHistory } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
+import SeuPedido from '../components/SeuPedidoCard/SeuPedido';
+
 
 function Pedido() {
   const history = useHistory();
-  const { carrinho } = useContext(CarrinhoContext);
+  const { carrinho, setCarrinho } = useContext(CarrinhoContext);
   const { id } = useContext(LogadoContext);
   const toast = useToast();
 
@@ -56,6 +59,8 @@ function Pedido() {
         carrinho.forEach((item) => {
           atualizarEstoque(item.id, item.quantidadeEstoque, item.quantidadePedido);
         });
+        //setar para ficar limpo apos a compra
+        setCarrinho([])
       }
     } catch (error) {
       console.error('Erro ao fazer o post de cadastro!', error);
@@ -64,17 +69,15 @@ function Pedido() {
 
   return (
     <>
-   
+      <Navbar />
       <Flex
         direction="column"
         height="100vh"
         justifyContent="center"
         alignItems="center"
-        p={4}
-        bg=""
+        pt={0}
       >
         <Heading as="h1" mb={6} textAlign="center">
-          - Seu Pedido -
         </Heading>
         <VStack
           spacing={4}
@@ -84,16 +87,16 @@ function Pedido() {
           overflowY="auto"
           maxHeight="100vh"
           p={4}
-          bg="  "
           borderRadius="lg"
           boxShadow="lg"
         >
           {carrinho.map((itemCarrinho, index) => (
             <Box key={index} width="100%">
-              <ItemCarrinho
+              <SeuPedido
                 imgUrl={itemCarrinho.imgUrl}
                 nome={itemCarrinho.nome}
                 preco={itemCarrinho.preco}
+                quantidadePedido={itemCarrinho.quantidadePedido}
               />
               {index < carrinho.length - 1 && <Divider my={2} />}
             </Box>

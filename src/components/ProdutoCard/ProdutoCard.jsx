@@ -43,13 +43,18 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
         var estoque = item.quantidadeEstoque - item.quantidadePedido
         console.log('Estoque ' + (quantidadeEstoque - item.quantidadePedido))
         if(estoque <= 0) {
-          console.log('não dá pra comprar o que não tem')
+          toast({
+            title: 'Quantidade excedida',
+            status: 'error',
+            duration: 1500,
+            isClosable: true,
+          })
           itemAdicionarMaisUm = false
           adicionar = false;
         } else {
           item.quantidadePedido++
           itemAdicionarMaisUm = true
-        }
+        } 
       }
     })
 
