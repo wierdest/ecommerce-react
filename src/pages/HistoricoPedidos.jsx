@@ -13,7 +13,6 @@ function HistoricoPedidos() {
   const [pedidos, setPedidos] = useState([]);
   const {nome, id } = useContext(LogadoContext)
   const [loading, setLoading] = useState(true);
-
   const history = useHistory()
 
   const handleNavegacaoProdutosPedido = (event, id) => {
