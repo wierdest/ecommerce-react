@@ -18,7 +18,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 
-function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeEstoque, quantidadePedido}) {
+function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeEstoque, quantidadePedido, avaliacao}) {
   const history = useHistory()
   const toast = useToast()
 
@@ -115,9 +115,13 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
           </Text>
         </Stack>
         <Stack direction="row" spacing={1} justify="center" align="center" mb="4">
-          {[...Array(estrelas)].map((_, index) => (
-            <StarIcon key={index} color="yellow.400" w={6} h={6} />
-          ))}
+          {
+
+            [...Array( avaliacao != null ? avaliacao : estrelas)].map((_, index) => (
+              <StarIcon key={index} color="yellow.400" w={6} h={6} />
+            ))
+          
+          }
         </Stack>
       <Divider />
       <CardFooter>

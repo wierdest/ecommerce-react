@@ -97,6 +97,7 @@ function Pedido() {
                 nome={itemCarrinho.nome}
                 preco={itemCarrinho.preco}
                 quantidadePedido={itemCarrinho.quantidadePedido}
+                
               />
               {index < carrinho.length - 1 && <Divider my={2} />}
             </Box>
