@@ -5,7 +5,6 @@ import { LogadoContext } from "../context/LogadoContext"
 import { api } from '../api/api'
 
 function Cadastro() {
-
     const {nome, email,  id, estaLogado, setNome, setEmail, setEstaLogado, setId} = useContext(LogadoContext)
     const [senha, setSenha] = useState('')
     const [message, setMessage] = useState('');
@@ -100,7 +99,7 @@ function Cadastro() {
         </Box>
       </Box>
     )
-  }
+}
   
 export default Cadastro
   

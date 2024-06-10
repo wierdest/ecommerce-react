@@ -50,6 +50,9 @@ function SeuPedido({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque
                 <Text py='2'>
                     R$ {preco}   
                 </Text>
+                <Text py='2'>
+                    {descricao}   
+                </Text>
                 {
                   avaliacao && <Avaliacao
                       onChange={(value) => handleAvaliacaoChange(value)} 
