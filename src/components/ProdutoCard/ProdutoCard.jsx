@@ -138,7 +138,7 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
           >
             Saber Mais
           </Button>
-          <Button onClick={handleComprar} variant="solid" colorScheme="blue">
+          <Button onClick={handleComprar} variant="solid" >
             Comprar
           </Button>
         </ButtonGroup>

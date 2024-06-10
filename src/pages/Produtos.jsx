@@ -44,9 +44,8 @@ function Produtos() {
       <Navbar />
       <Box
         display="flex"
-        justifyContent="flex-start"
         alignItems="center"
-        paddingLeft="2rem"
+        p={'20px'}
       >
         <Input
           placeholder="Pesquisar produto..."
@@ -60,7 +59,8 @@ function Produtos() {
           }}
         />
       </Box>
-      <SimpleGrid spacing={4} templateColumns="repeat(3,1fr)">
+
+      <SimpleGrid p={'20px'} spacing={4} templateColumns="repeat(4, 1fr)">
         {filtrarProdutos().map((produto) => (
           <ProdutoCard
             key={produto.id}

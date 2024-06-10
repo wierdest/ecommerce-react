@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Box, Flex, Link, Spacer, IconButton } from "@chakra-ui/react";
 import { LogadoContext } from '../../context/LogadoContext';
 import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
@@ -11,6 +11,7 @@ function Navbar() {
 
   const { estaLogado, setEstaLogado, nome } = useContext(LogadoContext)
   const { carrinho } = useContext(CarrinhoContext)
+  const history = useHistory();
 
   const handleLogout = () => {
     localStorage.removeItem('estaLogado')
