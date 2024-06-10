@@ -1,4 +1,4 @@
-import { SimpleGrid, Input, Box } from '@chakra-ui/react';
+import { SimpleGrid, Input, Box, Flex, Heading } from '@chakra-ui/react';
 import ProdutoCard from '../components/ProdutoCard/ProdutoCard';
 import { useEffect, useState, useContext } from 'react';
 import { LogadoContext } from '../context/LogadoContext';
@@ -17,12 +17,13 @@ function ProdutosCategoria() {
     if (!estaLogado) {
       history.push('/login');
     }
+    obterTodos()
   }, [estaLogado, history]);
 
   const obterTodos = async () => {
     try {
       const response = await api.get('/produto');
-      var produtosFiltrados = response.data.filter((produto) => produto.categoria == categoria);
+      var produtosFiltrados = response.data.filter((produto) => produto.quantidade > 0 && produto.categoria == categoria);
       console.log(produtosFiltrados)
       setProdutos(produtosFiltrados);
 
@@ -31,10 +32,7 @@ function ProdutosCategoria() {
     }
   };
 
-  useEffect(() => {
-    obterTodos();
-  }, []);
-
+ 
   return (
     <>
       <Navbar />
@@ -45,7 +43,10 @@ function ProdutosCategoria() {
         paddingLeft="2rem"
       >
       </Box>
-      <SimpleGrid spacing={4} templateColumns="repeat(3,1fr)">
+      {
+        produtos.length > 0
+        ?
+        <SimpleGrid spacing={4} templateColumns="repeat(3,1fr)">
         {produtos.map((produto) => (
           <ProdutoCard
             key={produto.id}
@@ -59,6 +60,22 @@ function ProdutosCategoria() {
           />
         ))}
       </SimpleGrid>
+      :
+        <Flex
+        direction="column"
+        height="100vh"
+        w="200vh"
+        justifyContent="center"
+        alignItems="center"
+        p={4}
+        >
+        <Heading as="h1" mb={6} textAlign="center">
+          Não temos mais nenhum produto nessa categoria! <br/> Volte amanhã!
+        </Heading>
+      </Flex>
+
+      }
+    
     </>
   );
 }

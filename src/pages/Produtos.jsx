@@ -71,6 +71,7 @@ function Produtos() {
             categoria={produto.categoria}
             quantidadeEstoque={produto.quantidade}
             quantidadePedido={1}
+            avaliacao={produto.avaliacao != null ? produto.avaliacao : null}
           />
         ))}
       </SimpleGrid>

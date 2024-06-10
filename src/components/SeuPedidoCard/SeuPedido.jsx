@@ -1,29 +1,27 @@
 import {
     Card,
     CardBody,
-    CardFooter,
     Stack,
     Image,
     Heading,
     Text,
-    IconButton,
     HStack,
     Flex
   } from '@chakra-ui/react';
-import { CarrinhoContext } from '../../context/CarrinhoContext';
-import { useContext } from 'react';
-import BotaoExcluir from '../BotaoExcluir/BotaoExcluir';
-import ItemCarrinho from '../ItemCarrinho/ItemCarrinho';
+import Avaliacao from '../Avaliacao/Avaliacao';
+import { api } from '../../api/api';
 
 
-function SeuPedido({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido}) {
+function SeuPedido({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido, avaliacao}) {
 
-  const {carrinho, setCarrinho} = useContext(CarrinhoContext)
-
-  const handleExcluirItem = () => {
-    console.log("ID do item carrinho " + id)
-    setCarrinho(carrinho.filter((item) => item.id != id))
-  }
+  const handleAvaliacaoChange = async (value) => {
+    const response = await api.patch(`/produto/${id}`, { avaliacao: value});
+    if(response.status == 200) {
+      console.log("Produto avaliado com ", response.data.avaliacao, " estrelas!")
+    } else {
+      console.log("Erro ao avaliar o produto!");
+    }
+  };
 
   return (
     <>
@@ -52,6 +50,13 @@ function SeuPedido({index, id, imgUrl, nome, descricao, preco, quantidadeEstoque
                 <Text py='2'>
                     R$ {preco}   
                 </Text>
+                {
+                  avaliacao && <Avaliacao
+                      onChange={(value) => handleAvaliacaoChange(value)} 
+                      defaultValue={0}
+                      />
+                }
+                
                 </CardBody>
             </Flex> 
         </Stack>

@@ -78,8 +78,8 @@ function HistoricoPedidos() {
                   {/* <span>{`Pedido #${pedido.id}`}</span> */}
                   <span>{`Valor Total: R$ ${pedido.valorTotal}`}</span>
                   <Avaliacao
-                    onChange={(value) => handleAvaliacaoChange(index, value)} // Passando o índice do pedido
-                    defaultValue={pedido.avaliacao} // Se houver uma avaliação prévia, passa como valor padrão
+                    onChange={(value) => handleAvaliacaoChange(index, value)}
+                    defaultValue={pedido.avaliacao}
                   />
                   
                 </Flex>

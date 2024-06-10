@@ -18,7 +18,8 @@ function ProdutosPedido() {
         itensPedido.forEach(async (itemPedido) => {
             var responseProduto = await api.get(`/produto/${itemPedido.idProduto}`)
             var produto = responseProduto.data
-            const produtoHistorico = { 
+            const produtoHistorico = {
+                idProduto: itemPedido.idProduto, 
                 imgUrl: produto.imgUrl, 
                 nome: produto.nome,
                 preco: produto.preco,
@@ -70,10 +71,12 @@ function ProdutosPedido() {
 
               <Box key={index} width="100%">
                 <SeuPedido
+                  id={produtoPedido.idProduto}
                   imgUrl={produtoPedido.imgUrl}
                   nome={produtoPedido.nome}
                   preco={produtoPedido.preco}
                   quantidadePedido={produtoPedido.quantidadePedido}
+                  avaliacao
                 />
                 {index < produtosPedido.length - 1 && <Divider my={2} />}
               </Box>
