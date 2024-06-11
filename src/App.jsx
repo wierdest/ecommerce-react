@@ -38,7 +38,7 @@ function App() {
             <Route exact path="/pedidos/:id" component={ProdutosPedido} />
             <Route
               exact
-              path="/politicas-de-privacidade"
+              path="/privacidade"
               component={PoliticasDePrivacidade}
             />
             <Route exact path="/sobre" component={SobreNos} />
