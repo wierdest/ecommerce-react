@@ -1,24 +1,25 @@
 import {
-  Button,
   Box,
   Flex,
   Heading,
-  useToast,
   VStack,
   Divider,
-  Text,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { api } from '../api/api';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import SeuPedido from '../components/SeuPedidoCard/SeuPedido';
 import Loading from '../components/Loading/Loading';
+import { useHistory, useParams } from 'react-router-dom';
+import { LogadoContext } from '../context/LogadoContext';
 
 function ProdutosPedido() {
   const { id } = useParams();
   const [produtosPedido, setProdutosPedido] = useState([]);
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
+  const { estaLogado } = useContext(LogadoContext);
 
   const fetchProdutosPedido = async (itensPedido) => {
     var produtos = [];
@@ -47,6 +48,10 @@ function ProdutosPedido() {
   };
 
   useEffect(() => {
+    if (!estaLogado) {
+      history.push('/login');
+      return
+    }
     try {
       fetchItensPedido();
     } finally {
