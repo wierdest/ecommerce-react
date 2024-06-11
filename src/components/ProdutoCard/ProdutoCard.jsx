@@ -18,7 +18,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 
-function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeEstoque, quantidadePedido, avaliacao}) {
+function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeEstoque, quantidadePedido, avaliacao, especifico}) {
   const history = useHistory()
   const toast = useToast()
 
@@ -126,7 +126,11 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
-          <Button
+          {
+            !especifico
+
+            &&
+          <Button 
             variant="ghost"
             onClick={() => {
               {
@@ -138,6 +142,8 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
           >
             Saber Mais
           </Button>
+          
+          }
           <Button onClick={handleComprar} variant="solid" >
             Comprar
           </Button>
