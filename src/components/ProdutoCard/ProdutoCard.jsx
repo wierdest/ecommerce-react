@@ -105,7 +105,7 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
           <Badge mb="4" colorScheme='red'>{categoria}</Badge>
          <Heading size="md">{nome}</Heading>
       </CardBody>
-      <Stack mt="6" spacing="3">
+      <Stack alignItems='center' mt="6" spacing="3">
          
           <Text>{descricao}</Text>
           <Text color="white.600" fontSize="2xl">

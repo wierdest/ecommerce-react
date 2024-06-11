@@ -20,7 +20,7 @@ function MenuCategoria() {
       <MenuButton
         as={IconButton}
         aria-label='Options'
-        variant='ghost'
+        variant='outline'
       >Categorias</MenuButton>
       <MenuList>
         <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[0])} icon={<AddIcon />}>

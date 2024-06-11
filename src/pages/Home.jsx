@@ -17,16 +17,8 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div>
-        <img
-          src="https://media.discordapp.net/attachments/1211771660508733471/1248731657658437632/image.png?ex=6664bb7b&is=666369fb&hm=ed43213a54919e9e2fd29f3ad96d35b0614fb1bbab4b23fa25282d6c9ecd3739&=&format=webp&quality=lossless"
-          alt="Descrição da imagem"
-          height="100%"
-          width="100%"
-          display="flex"
-        />
-      </div>
       <Box
+        p={'20px'}
         height="100vh"
         display="flex"
         justifyContent="center"

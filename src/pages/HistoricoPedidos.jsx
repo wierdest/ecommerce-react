@@ -11,9 +11,10 @@ import Loading from '../components/Loading/Loading';
 
 function HistoricoPedidos() {
   const [pedidos, setPedidos] = useState([]);
-  const {nome, id } = useContext(LogadoContext)
+  const {nome, id, estaLogado } = useContext(LogadoContext)
   const [loading, setLoading] = useState(true);
   const history = useHistory()
+
 
   const handleNavegacaoProdutosPedido = (event, id) => {
     event.preventDefault()
@@ -33,6 +34,9 @@ function HistoricoPedidos() {
     }
   };
   useEffect(() => {
+    if (!estaLogado) {
+      history.push('/login');
+    }
     fetchPedidos();
   }, []);
 

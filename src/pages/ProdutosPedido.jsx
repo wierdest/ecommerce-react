@@ -52,6 +52,7 @@ function ProdutosPedido() {
           pt={0}
         >
           <Heading as="h1" mb={6} textAlign="center">
+                Seu Pedido: # {id}
           </Heading>
           <VStack
             spacing={4}
