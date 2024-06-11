@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Flex, Heading, VStack, Divider, IconButton, Link } from '@chakra-ui/react';
+import { Flex, Heading, VStack, Link } from '@chakra-ui/react';
 import { api } from '../api/api';
 import Navbar from '../components/Navbar/Navbar';
 import Avaliacao from '../components/Avaliacao/Avaliacao';
 import { LogadoContext } from '../context/LogadoContext';
 import { useHistory } from 'react-router-dom';
+import MensagemVazia from '../components/MensagemVazia/MensagemVazia';
+import Loading from '../components/Loading/Loading';
 
 
 function HistoricoPedidos() {
   const [pedidos, setPedidos] = useState([]);
-  const {nome, id } = useContext(LogadoContext)
+  const {nome, id, estaLogado } = useContext(LogadoContext)
+  const [loading, setLoading] = useState(true);
   const history = useHistory()
+
 
   const handleNavegacaoProdutosPedido = (event, id) => {
     event.preventDefault()
@@ -21,13 +25,18 @@ function HistoricoPedidos() {
   const fetchPedidos = async () => {
     try {
       const response = await api.get('/pedido/');
-      var pedidos = response.data.filter((pedido) => pedido.idUser == id);
+      var pedidos = response.data.filter((pedido) => pedido.idUser == id).reverse();
       setPedidos(pedidos);
     } catch (error) {
       console.error('Erro ao buscar pedidos:', error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
+    if (!estaLogado) {
+      history.push('/login');
+    }
     fetchPedidos();
   }, []);
 
@@ -38,17 +47,18 @@ function HistoricoPedidos() {
   return (
     <>
       <Navbar />
-
       {
+        loading ? 
+        
+        <Loading/>
+        :
         pedidos.length > 0 
         ?
             <Flex
             direction="column"
             height="100vh"
-            w="200vh"
             justifyContent="center"
             alignItems="center"
-            p={4}
             >
             <Heading as="h1" mb={6} textAlign="center">
               {nome}, confira seu histórico de pedidos:
@@ -87,18 +97,11 @@ function HistoricoPedidos() {
             </VStack>
             </Flex>
         :
-            <Flex
-                direction="column"
-                height="100vh"
-                w="200vh"
-                justifyContent="center"
-                alignItems="center"
-                p={4}
-                >
-                <Heading as="h1" mb={6} textAlign="center">
-                  {nome}, vc ainda não comprou nada!
-                </Heading>
-            </Flex>
+          <MensagemVazia 
+            nome={nome}
+            mensagem={"vc ainda não comprou nada!"}
+          
+          />
       }
 
     </>

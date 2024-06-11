@@ -5,10 +5,12 @@ import { LogadoContext } from '../context/LogadoContext';
 import { api } from '../api/api';
 import Navbar from '../components/Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
+import Loading from '../components/Loading/Loading';
 
 function Produtos() {
   const [produtos, setProdutos] = useState([]);
   const [filtro, setFiltro] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const { estaLogado } = useContext(LogadoContext);
   const history = useHistory();
@@ -16,7 +18,9 @@ function Produtos() {
   useEffect(() => {
     if (!estaLogado) {
       history.push('/login');
+      return;
     }
+    obterTodos();
   }, [estaLogado, history]);
 
   const obterTodos = async () => {
@@ -26,12 +30,10 @@ function Produtos() {
       setProdutos(response.data.filter((produto) => produto.quantidade > 0));
     } catch (erro) {
       console.error('Ocorreu um erro obtendo os produtos', erro);
+    } finally {
+      setLoading(false);
     }
   };
-
-  useEffect(() => {
-    obterTodos();
-  }, []);
 
   const filtrarProdutos = () => {
     return produtos.filter((produto) =>
@@ -42,39 +44,41 @@ function Produtos() {
   return (
     <>
       <Navbar />
-      <Box
-        display="flex"
-        justifyContent="flex-start"
-        alignItems="center"
-        paddingLeft="2rem"
-      >
-        <Input
-          placeholder="Pesquisar produto..."
-          value={filtro}
-          onChange={(e) => setFiltro(e.target.value)}
-          mb={4}
-          sx={{
-            width: '350px',
-            fontSize: 'sm',
-            padding: '1rem 1rem',
-          }}
-        />
-      </Box>
-      <SimpleGrid spacing={4} templateColumns="repeat(3,1fr)">
-        {filtrarProdutos().map((produto) => (
-          <ProdutoCard
-            key={produto.id}
-            id={produto.id}
-            imgUrl={produto.imgUrl}
-            nome={produto.nome}
-            preco={produto.preco}
-            categoria={produto.categoria}
-            quantidadeEstoque={produto.quantidade}
-            quantidadePedido={1}
-            avaliacao={produto.avaliacao != null ? produto.avaliacao : null}
-          />
-        ))}
-      </SimpleGrid>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Box display="flex" alignItems="center" p={'20px'}>
+            <Input
+              placeholder="Pesquisar produto..."
+              value={filtro}
+              onChange={(e) => setFiltro(e.target.value)}
+              mb={4}
+              sx={{
+                width: '350px',
+                fontSize: 'sm',
+                padding: '1rem 1rem',
+              }}
+            />
+          </Box>
+
+          <SimpleGrid p={'20px'} spacing={4} templateColumns="repeat(4, 1fr)">
+            {filtrarProdutos().map((produto) => (
+              <ProdutoCard
+                key={produto.id}
+                id={produto.id}
+                imgUrl={produto.imgUrl}
+                nome={produto.nome}
+                preco={produto.preco}
+                categoria={produto.categoria}
+                quantidadeEstoque={produto.quantidade}
+                quantidadePedido={1}
+                avaliacao={produto.avaliacao != null ? produto.avaliacao : null}
+              />
+            ))}
+          </SimpleGrid>
+        </>
+      )}
     </>
   );
 }

@@ -1,21 +1,10 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
-  Image,
-  Heading,
-  Text,
-  Divider,
-  ButtonGroup,
-  Button,
-} from '@chakra-ui/react';
-import { px } from 'framer-motion';
+import { Flex } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ProdutoCard from '../components/ProdutoCard/ProdutoCard';
 import { api } from '../api/api';
+import Navbar from '../components/Navbar/Navbar';
+
 
 function ProdutoEspecifico() {
   
@@ -39,14 +28,25 @@ function ProdutoEspecifico() {
 
 
   return ( 
-    <ProdutoCard 
-    key={id} 
-    imgUrl={produto.imgUrl} 
-    nome={produto.nome}
-    descricao={produto.descricao}
-    preco ={produto.preco}
-  
-    />
+    <>
+       <Navbar/>
+       <Flex w='100vw'  justifyContent='center' >
+       <ProdutoCard
+          key={produto.id}
+          id={produto.id}
+          imgUrl={produto.imgUrl}
+          nome={produto.nome}
+          preco={produto.preco}
+          categoria={produto.categoria}
+          quantidadeEstoque={produto.quantidade}
+          quantidadePedido={1}
+          avaliacao={produto.avaliacao != null ? produto.avaliacao : null}
+        />
+       </Flex>
+       
+    
+    </>
+   
   );
 }
 
