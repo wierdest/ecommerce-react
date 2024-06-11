@@ -1,49 +1,65 @@
-import { Button, Box, Flex, Heading, useToast, VStack, Divider, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Box,
+  Flex,
+  Heading,
+  useToast,
+  VStack,
+  Divider,
+  Text,
+} from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { api } from '../api/api';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import SeuPedido from '../components/SeuPedidoCard/SeuPedido';
-
+import Loading from '../components/Loading/Loading';
 
 function ProdutosPedido() {
-    const { id } = useParams();
-    const [produtosPedido, setProdutosPedido] = useState([])
+  const { id } = useParams();
+  const [produtosPedido, setProdutosPedido] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const fetchProdutosPedido = async (itensPedido) => {
-        var produtos = []
-        itensPedido.forEach(async (itemPedido) => {
-            var responseProduto = await api.get(`/produto/${itemPedido.idProduto}`)
-            var produto = responseProduto.data
-            const produtoHistorico = {
-                idProduto: itemPedido.idProduto, 
-                imgUrl: produto.imgUrl, 
-                nome: produto.nome,
-                preco: produto.preco,
-                quantidadePedido: itemPedido.quantidade
-            }
-        
-            produtos.push(produtoHistorico)
-            setProdutosPedido(produtos)
-        })
-        console.log(produtos)
-        
+  const fetchProdutosPedido = async (itensPedido) => {
+    var produtos = [];
+    itensPedido.forEach(async (itemPedido) => {
+      var responseProduto = await api.get(`/produto/${itemPedido.idProduto}`);
+      var produto = responseProduto.data;
+      const produtoHistorico = {
+        idProduto: itemPedido.idProduto,
+        imgUrl: produto.imgUrl,
+        nome: produto.nome,
+        preco: produto.preco,
+        quantidadePedido: itemPedido.quantidade,
+      };
+
+      produtos.push(produtoHistorico);
+      setProdutosPedido(produtos);
+    });
+    console.log(produtos);
+  };
+
+  const fetchItensPedido = async () => {
+    const response = await api.get(`/pedido/${id}`);
+    var itensPedido = response.data.itens;
+    // console.log(itensPedido)
+    fetchProdutosPedido(itensPedido);
+  };
+
+  useEffect(() => {
+    try {
+      fetchItensPedido();
+    } finally {
+      setLoading(false);
     }
+  }, []);
 
-    const fetchItensPedido = async () => {
-        const response = await api.get(`/pedido/${id}`);
-        var itensPedido = response.data.itens;
-        // console.log(itensPedido)
-        fetchProdutosPedido(itensPedido)
-    }
-
-    useEffect(() => {
-        fetchItensPedido()
-    }, [])
-
-    return (
-      <>
-        <Navbar />
+  return (
+    <>
+      <Navbar />
+      {loading ? (
+        <Loading />
+      ) : (
         <Flex
           direction="column"
           height="100vh"
@@ -52,7 +68,7 @@ function ProdutosPedido() {
           pt={0}
         >
           <Heading as="h1" mb={6} textAlign="center">
-                Seu Pedido: # {id}
+            Seu Pedido: # {id}
           </Heading>
           <VStack
             spacing={4}
@@ -66,7 +82,6 @@ function ProdutosPedido() {
             boxShadow="lg"
           >
             {produtosPedido.map((produtoPedido, index) => (
-
               <Box key={index} width="100%">
                 <SeuPedido
                   id={produtoPedido.idProduto}
@@ -81,9 +96,9 @@ function ProdutosPedido() {
             ))}
           </VStack>
         </Flex>
-      </>
-    );
-  }
-  
+      )}
+    </>
+  );
+}
+
 export default ProdutosPedido;
-  
