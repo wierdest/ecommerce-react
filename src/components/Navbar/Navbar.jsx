@@ -15,6 +15,7 @@ import CarrinhoModal from '../CarrinhoModal/CarrinhoModal';
 import { FiLogOut } from 'react-icons/fi';
 import MenuCategoria from '../MenuCategoria/MenuCategoria';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
+import logo from '../../assets/img/logo.png'
 
 function Navbar() {
   const { estaLogado, setEstaLogado, nome } = useContext(LogadoContext);
@@ -47,7 +48,8 @@ function Navbar() {
           <Image
             borderRadius="full"
             boxSize="150px"
-            src="src\assets\img\Untitled_design_34.png"
+            src={logo}
+            
           />
         </ListItem>
         <Box as="li" display="flex" alignItems="center">
