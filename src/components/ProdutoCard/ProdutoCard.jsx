@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Badge,
+  Box,
   Card,
   CardBody,
   CardFooter,
@@ -15,16 +16,26 @@ import {
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react';
 import { CarrinhoContext } from '../../context/CarrinhoContext';
 
-function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeEstoque, quantidadePedido, avaliacao, especifico}) {
-  const history = useHistory()
-  const toast = useToast()
+function ProdutoCard({
+  id,
+  imgUrl,
+  nome,
+  descricao,
+  preco,
+  categoria,
+  quantidadeEstoque,
+  quantidadePedido,
+  avaliacao,
+  especifico,
+}) {
+  const history = useHistory();
+  const toast = useToast();
 
-  const [estrelas, setEstrelas] = useState(0)
+  const [estrelas, setEstrelas] = useState(0);
 
-  const {carrinho, setCarrinho} = useContext(CarrinhoContext)
+  const { carrinho, setCarrinho } = useContext(CarrinhoContext);
 
   useEffect(() => {
     const gerarEstrelasAleatorias = () => Math.floor(Math.random() * 5) + 1;
@@ -32,64 +43,65 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
   }, []);
 
   const handleComprar = () => {
+    var itemCarrinho = {
+      id,
+      imgUrl,
+      nome,
+      descricao,
+      preco,
+      quantidadeEstoque,
+      quantidadePedido,
+    };
 
-    var itemCarrinho = {id, imgUrl, nome, descricao, preco, quantidadeEstoque, quantidadePedido}
-
-    if(quantidadeEstoque <= 0) {
+    if (quantidadeEstoque <= 0) {
       toast({
         title: 'Quantidade excedida',
         status: 'error',
         duration: 1500,
         isClosable: true,
-      })
+      });
       return;
     }
 
-    var itens = [...carrinho]
-    var itemAdicionarMaisUm = false
+    var itens = [...carrinho];
+    var itemAdicionarMaisUm = false;
     var adicionar = true;
-    
+
     itens.forEach((item) => {
-      if(item.id == id) {
-        var estoque = item.quantidadeEstoque - item.quantidadePedido
-        console.log('Estoque ' + (quantidadeEstoque - item.quantidadePedido))
-        if(estoque <= 0) {
+      if (item.id === id) {
+        var estoque = item.quantidadeEstoque - item.quantidadePedido;
+        if (estoque <= 0) {
           toast({
             title: 'Quantidade excedida',
             status: 'error',
             duration: 1500,
             isClosable: true,
-          })
-          itemAdicionarMaisUm = false
+          });
+          itemAdicionarMaisUm = false;
           adicionar = false;
         } else {
-          item.quantidadePedido++
-          itemAdicionarMaisUm = true
-        } 
+          item.quantidadePedido++;
+          itemAdicionarMaisUm = true;
+        }
       }
-    })
+    });
 
-    if(itemAdicionarMaisUm) {
-      console.log('Adicionando mais um!')
-      setCarrinho([...itens])
-
+    if (itemAdicionarMaisUm) {
+      setCarrinho([...itens]);
     } else {
-      if(adicionar) {
-        setCarrinho([...itens, itemCarrinho])
+      if (adicionar) {
+        setCarrinho([...itens, itemCarrinho]);
         toast({
           title: 'Produto Adicionado ao Carrinho',
           status: 'success',
           duration: 1500,
           isClosable: true,
-        }) 
+        });
       }
-
     }
+  };
 
-
-   
-  }
-  return ( 
+  return (
     <Card maxW="sm">
       <CardBody>
         <Image
@@ -102,49 +114,43 @@ function ProdutoCard({id, imgUrl, nome, descricao, preco, categoria, quantidadeE
           mx="auto"
           mb="4"
         />
-          <Badge mb="4" colorScheme='red'>{categoria}</Badge>
-         <Heading size="md">{nome}</Heading>
+        <Box display="flex" justifyContent="center" mb="4">
+          <Badge colorScheme="red">{categoria}</Badge>
+        </Box>
+        <Heading size="md" textAlign="center">
+          {nome}
+        </Heading>
       </CardBody>
-      <Stack alignItems='center' mt="6" spacing="3">
-         
-          <Text>{descricao}</Text>
-          <Text color="white.600" fontSize="2xl">
-            {preco !== undefined
-              ? `R$ ${preco.toFixed(2)}`
-              : 'Preço não disponível'}
-          </Text>
-        </Stack>
-        <Stack direction="row" spacing={1} justify="center" align="center" mb="4">
-          {
-
-            [...Array( avaliacao != null ? avaliacao : estrelas)].map((_, index) => (
-              <StarIcon key={index} color="yellow.400" w={6} h={6} />
-            ))
-          
-          }
-        </Stack>
+      <Stack alignItems="center" mt="6" spacing="3">
+        <Text textAlign="center">{descricao}</Text>
+        <Text color="white.600" fontSize="2xl">
+          {preco !== undefined
+            ? `R$ ${preco.toFixed(2)}`
+            : 'Preço não disponível'}
+        </Text>
+      </Stack>
+      <Stack direction="row" spacing={1} justify="center" align="center" mb="4">
+        {[...Array(avaliacao != null ? avaliacao : estrelas)].map(
+          (_, index) => (
+            <StarIcon key={index} color="yellow.400" w={6} h={6} />
+          )
+        )}
+      </Stack>
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
-          {
-            !especifico
-
-            &&
-          <Button 
-            variant="ghost"
-            onClick={() => {
-              {
+          {!especifico && (
+            <Button
+              variant="ghost"
+              onClick={() => {
                 history.push(`/produtos/${id}`);
-              }
-            }}
-            
-            colorScheme="blue"
-          >
-            Saber Mais
-          </Button>
-          
-          }
-          <Button onClick={handleComprar} variant="solid" >
+              }}
+              colorScheme="blue"
+            >
+              Saber Mais
+            </Button>
+          )}
+          <Button onClick={handleComprar} variant="solid">
             Comprar
           </Button>
         </ButtonGroup>
