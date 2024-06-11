@@ -6,6 +6,7 @@ import { api } from '../api/api';
 import Navbar from '../components/Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
 import Loading from '../components/Loading/Loading';
+import Footer from '../components/Footer/Footer';
 
 function Produtos() {
   const [produtos, setProdutos] = useState([]);
