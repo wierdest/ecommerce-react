@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { LogadoContext } from '../context/LogadoContext';
 import { Box, Image } from '@chakra-ui/react';
 import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
 
 function Home() {
   const { estaLogado, id } = useContext(LogadoContext);
