@@ -2,8 +2,6 @@
 
 Projeto feito com o intuito de aprimorar as habilidades com o React e Javascript, utilizando de bibliotecas auxiliares, que nesse caso foi o Chakra UI, para criar um ecommerce e suas funcionalidades.
 
-# Instruções  básicas
-
 ## Parte do front end:
 Para inicializar o projeto, deverá ser instalado as seguintes dependências na linha de comando do vscode:
 
