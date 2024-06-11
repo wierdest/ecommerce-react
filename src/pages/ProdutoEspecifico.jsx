@@ -41,6 +41,7 @@ function ProdutoEspecifico() {
           quantidadeEstoque={produto.quantidade}
           quantidadePedido={1}
           avaliacao={produto.avaliacao != null ? produto.avaliacao : null}
+          especifico
         />
        </Flex>
        
