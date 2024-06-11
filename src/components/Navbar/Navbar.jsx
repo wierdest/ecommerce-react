@@ -48,7 +48,6 @@ function Navbar() {
             borderRadius="full"
             boxSize="150px"
             src="src\assets\img\Untitled_design_34.png"
-            alt="Dan Abramov"
           />
         </ListItem>
         <Box as="li" display="flex" alignItems="center">

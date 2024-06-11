@@ -1,4 +1,4 @@
-import { HamburgerIcon, AddIcon, ExternalLinkIcon, RepeatIcon, EditIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon} from '@chakra-ui/icons';
 import { Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
@@ -23,28 +23,28 @@ function MenuCategoria() {
         variant='outline'
       >Categorias</MenuButton>
       <MenuList>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[0])} icon={<AddIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[0])} icon={<ChevronRightIcon />}>
           Eletrônicos
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[1])} icon={<ExternalLinkIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[1])} icon={<ChevronRightIcon />}>
           Pets
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[2])} icon={<RepeatIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[2])} icon={<ChevronRightIcon />}>
           Automotivo
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[3])} icon={<EditIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[3])} icon={<ChevronRightIcon />}>
           Alimentos
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[4])} icon={<AddIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[4])} icon={<ChevronRightIcon />}>
           Calçados
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[5])} icon={<ExternalLinkIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[5])} icon={<ChevronRightIcon />}>
           Papelaria
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[6])} icon={<RepeatIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[6])} icon={<ChevronRightIcon />}>
           Jogos
         </MenuItem>
-        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[7])}icon={<EditIcon />}>
+        <MenuItem onClick={(e) => handleNavegacaoCategoria(e, categorias[7])}icon={<ChevronRightIcon />}>
           Livros
         </MenuItem>
       </MenuList>

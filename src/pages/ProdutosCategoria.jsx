@@ -58,7 +58,7 @@ function ProdutosCategoria() {
       {loading ? 
         <Loading/>
       : produtos.length > 0 ? (
-        <SimpleGrid spacing={4} templateColumns="repeat(3, 1fr)">
+        <SimpleGrid p="25px" spacing={4} templateColumns="repeat(3, 1fr)">
           {produtos.map((produto) => (
             <ProdutoCard
               key={produto.id}
